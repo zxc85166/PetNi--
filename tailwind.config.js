@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         bg: "#E5E5E5",
+        bg_match: "#FAFAFA",
       },
       fontFamily: {
         sans: ['"Inter var"', ...defaultTheme.fontFamily.sans],
@@ -18,5 +19,6 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
     require("@tailwindcss/aspect-ratio"),
+    require("daisyui"),
   ],
 };
