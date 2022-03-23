@@ -1,77 +1,86 @@
 <script setup>
-import navbar from "@/components/navbar.vue";
 import ButtonRepoVue from "@/components/ButtonRepo.vue";
+import { Cat } from "@vicons/fa";
+import { NIcon, NSwitch } from 'naive-ui';
+const railStyle = ({
+  checked
+}) => {
+  const style = {};
+  if (checked) {
+    style.background = "#FDAAA2";
+  }
+  return style;
+}
 </script>
 
 <template>
-  <header>
-    <navbar />
-  </header>
-  <div class="grid grid-cols-3 gap-0">
-    <div class="bg-gray-100 box-shadow pl-20 py-5">
-      <div>
-        <p class="font-black">我想尋找</p>
-        <button class="btn rounded-3xl w-[90px] h-[90px]">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+  <div class="bg-bg">
+    <div class="shadow-md drop-shadow-lg pl-20 py-5 w-[413px] bg-bg_match">
+      <!-- 我想尋找 -->
+      <section>
+        <p class="font-black mb-1 mt-2 text-base">我想尋找</p>
+        <button class="btn-lg">
+          <n-icon size="36">
+            <Cat />
+          </n-icon>
         </button>
-      </div>
-      <div>
-        <p class="font-black">性別</p>
-        <button class="btn rounded-3xl w-[90px] h-[90px]">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+        <button class="btn-lg">
+          <n-icon size="36">
+            <Cat />
+          </n-icon>
         </button>
-      </div>
-      <div>
-        <p class="font-black">年齡</p>
-        <button class="btn rounded-[14px] w-[90px] h-10">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
+        <button class="btn-lg text-4xl">不拘</button>
+      </section>
+      <!-- 性別 -->
+      <section>
+        <p class="font-black mb-1 mt-2 text-base">性別</p>
+        <button class="btn-lg">
+          <n-icon size="36">
+            <Cat />
+          </n-icon>
         </button>
-      </div>
+        <button class="btn-lg">
+          <n-icon size="36">
+            <Cat />
+          </n-icon>
+        </button>
+        <button class="btn-lg">
+          <n-icon size="36">
+            <Cat />
+          </n-icon>
+        </button>
+      </section>
+      <!-- 年齡 -->
+      <section>
+        <p class="font-black mb-1 mt-2 text-base">年齡</p>
+        <button class="btn-sm">幼齡</button>
+        <button class="btn-sm">成年</button>
+        <button class="btn-sm">不拘</button>
+      </section>
+      <!-- 顏色 -->
+      <section>
+        <p class="font-black mb-1 mt-2 text-base">顏色</p>
+        <button class="btn-sm">白貓</button>
+        <button class="btn-sm">黑貓</button>
+        <button class="btn-sm">乳牛貓</button>
+        <button class="btn-sm mt-2">乳牛貓</button>
+        <button class="btn-sm mt-2">乳牛貓</button>
+        <button class="btn-sm mt-2">乳牛貓</button>
+        <button class="btn-sm mt-2">玳瑁貓</button>
+        <button class="btn-sm mt-2">不拘</button>
+      </section>
+      <!-- 搜尋附近 -->
+      <section class="py-3 flex justify-between items-center">
+        <span class="font-black mb-1 mt-2 text-base">搜尋附近</span>
+        <n-switch size="medium" class="pr-10" :rail-style="railStyle" />
+      </section>
+      <!-- 互動音效 -->
+      <section class="py-3 flex justify-between items-center">
+        <span class="font-black mb-1 mt-2 text-base">互動音效</span>
+        <n-switch size="medium" class="pr-10" :rail-style="railStyle" />
+      </section>
     </div>
-    <div class="col-span-2">09</div>
   </div>
 </template>
 <style scoped>
-.box-shadow {
-  box-shadow: 0px 2px 7px rgba(10, 10, 10, 0.07);
-}
 </style>

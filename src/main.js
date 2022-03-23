@@ -10,6 +10,9 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+const meta = document.createElement("meta");
+meta.name = "naive-ui-style";
+document.head.appendChild(meta);
 
 app.use(router);
 app.mount("#app");
