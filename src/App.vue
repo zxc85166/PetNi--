@@ -1,9 +1,10 @@
 <script setup>
 import navbar from "@/components/navbar.vue";
+
 </script>
 
 <template>
-  <header>
+  <header v-if="$route.meta.title !== 'Home'">
     <navbar />
   </header>
   <div>
