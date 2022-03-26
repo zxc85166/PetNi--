@@ -1,8 +1,12 @@
 <script setup>
 import ButtonRepoVue from "@/components/ButtonRepo.vue";
 import { Cat } from "@vicons/fa";
-import { WomanOutlined } from "@vicons/antd";
+import { WomanOutlined, ManOutlined } from "@vicons/antd";
 import { NIcon, NSwitch, NAvatar } from "naive-ui";
+import { ref, onMounted } from 'vue'
+
+// import api.json
+import api from "@/assets/api.json";
 const railStyle = ({ checked }) => {
   const style = {};
   if (checked) {
@@ -10,6 +14,11 @@ const railStyle = ({ checked }) => {
   }
   return style;
 };
+const el = ref()
+
+onMounted(() => {
+  el.value = api[0].animal_id;
+})
 </script>
 
 <template>
@@ -33,21 +42,17 @@ const railStyle = ({ checked }) => {
       <!-- 性別 -->
       <section>
         <p class="font-PeNi_black mb-1 mt-2 text-base">性別</p>
-        <button class="btn-lg">
+        <button class="btn-lg text-PeNi_blue">
           <n-icon size="36">
-            <Cat />
+            <ManOutlined />
           </n-icon>
         </button>
         <button class="btn-lg">
-          <n-icon size="36">
-            <Cat />
+          <n-icon size="36" class="text-PeNi_pink">
+            <WomanOutlined />
           </n-icon>
         </button>
-        <button class="btn-lg">
-          <n-icon size="36">
-            <Cat />
-          </n-icon>
-        </button>
+        <button class="btn-lg text-4xl">不拘</button>
       </section>
       <!-- 年齡 -->
       <section>
@@ -93,7 +98,7 @@ const railStyle = ({ checked }) => {
           class="absolute h-[430.24px] w-[253.74px] -translate-y-12 -translate-x-12 -rotate-6 rounded-[32px] bg-white drop-shadow-xl"
         >
           <span class="absolute left-[20%] top-[43%] -rotate-12 text-center text-PeNi_pink">
-            <p>很抱歉 !</p>
+            <p>很抱歉 !{{ el }}</p>
             <p>已沒有單身狗、單身貓了，</p>請嘗試修改篩選條件。
           </span>
         </div>

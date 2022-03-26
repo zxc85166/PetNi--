@@ -14,7 +14,7 @@ module.exports = {
         PeNi_grey_light: "#DEDEDE",
         PeNi_pink: "#FDAAA2",
         bg: "#F8F8F8",
-        PeNi_blue: "70D4F4",
+        PeNi_blue: "#70D4F4",
       },
       fontFamily: {
         sans: ['"Inter var"', ...defaultTheme.fontFamily.sans],

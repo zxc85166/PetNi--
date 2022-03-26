@@ -10,20 +10,13 @@ export const useStore = defineStore({
     PhotoURL: "",
     //儲存取得資料
     UserData: "",
+    //api資料
+    Api: "",
   }),
-  getters: {
-    //排序UserData 過去到未來
-    sortUserData: (state) => {
-      if (state.UserData) {
-        return state.UserData.sort((a, b) => {
-          return a.date > b.date ? 1 : -1;
-        });
-      }
-    },
-  },
+  getters: {},
   actions: {
+    //清空
     clear() {
-      //清空
       this.UserName = "登入";
       this.UserEmail = "";
       this.PhotoURL = "";
@@ -32,6 +25,9 @@ export const useStore = defineStore({
     //設定UserEmail
     setUserEmail(email) {
       this.UserEmail = email;
+    },
+    Api(api) {
+      this.Api = api;
     },
   },
   // 開啟資料快取
