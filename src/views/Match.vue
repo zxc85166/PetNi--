@@ -1,8 +1,9 @@
 <script setup>
 import ButtonRepoVue from "@/components/ButtonRepo.vue";
-import { Cat } from "@vicons/fa";
+import { AnimalCat24Regular } from "@vicons/fluent";
+import { AnimalDog24Regular } from "@vicons/fluent";
 import { WomanOutlined, ManOutlined } from "@vicons/antd";
-import { NIcon, NSwitch, NAvatar } from "naive-ui";
+import { NIcon, NSwitch, NAvatar, NImage } from "naive-ui";
 import { ref, onMounted } from 'vue'
 
 // import api.json
@@ -14,27 +15,35 @@ const railStyle = ({ checked }) => {
   }
   return style;
 };
-const el = ref()
+//有無被點擊
+const isClicked = ref(false);
+//點擊篩選按鈕
+function clickFilterBtn(e) {
+  // console.log(e.target.innerHTML);
+  isClicked.value = !isClicked.value;
+}
+const el = ref(null);
 
 onMounted(() => {
-  el.value = api[0].animal_id;
+  el.value = api[3].album_file;
 })
+
 </script>
 
 <template>
-  <div class="flex max-h-screen bg-bg">
+  <div class="flex h-full bg-bg">
     <div class="w-[413px] bg-bg_match py-5 pl-20 shadow-md drop-shadow-xl">
       <!-- 我想尋找 -->
       <section>
         <p class="font-PeNi_black mb-1 mt-2 text-base">我想尋找</p>
-        <button class="btn-lg">
+        <button @click="clickFilterBtn($event)" :class="{ 'btn-clicked': isClicked }" class="btn-lg">
           <n-icon size="36">
-            <Cat />
+            <AnimalCat24Regular />
           </n-icon>
         </button>
         <button class="btn-lg">
           <n-icon size="36">
-            <Cat />
+            <AnimalDog24Regular />
           </n-icon>
         </button>
         <button class="btn-lg text-4xl">不拘</button>
@@ -57,7 +66,7 @@ onMounted(() => {
       <!-- 年齡 -->
       <section>
         <p class="font-PeNi_black mb-1 mt-2 text-base">年齡</p>
-        <button class="btn-sm">幼齡</button>
+        <button @click="clickFilterBtn($event)" class="btn-sm">幼齡</button>
         <button class="btn-sm">成年</button>
         <button class="btn-sm">不拘</button>
       </section>
@@ -98,9 +107,14 @@ onMounted(() => {
           class="absolute h-[430.24px] w-[253.74px] -translate-y-12 -translate-x-12 -rotate-6 rounded-[32px] bg-white drop-shadow-xl"
         >
           <span class="absolute left-[20%] top-[43%] -rotate-12 text-center text-PeNi_pink">
-            <p>很抱歉 !{{ el }}</p>
+            <p>很抱歉 !</p>
             <p>已沒有單身狗、單身貓了，</p>請嘗試修改篩選條件。
           </span>
+          <div
+            class="absolute h-[461.96px] w-[287.84px] translate-y-1 border-[12px] border-white -translate-x-3 -rotate-[15deg] rounded-[32px] bg-white drop-shadow-xl"
+          >
+            <n-image class="rounded-[24px]" :src="el" show-toolbar-tooltip alt="petImg" />
+          </div>
         </div>
       </div>
       <!-- 隨機推薦 -->
