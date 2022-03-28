@@ -137,8 +137,8 @@ function clickCatColorsBtn(e) {
 //api資料
 const el = ref([]);
 //載入資料
-const loadData = () => {
-  for (let i = 0; i < 500; i++) {
+const loadData = async (howmuch) => {
+  for (let i = 0; i < howmuch; i++) {
     if (api[i].album_file == '') {
       el.value.push(dogDefault);
     } else if (api[i].album_file == 'https://asms.coa.gov.tw/amlapp/upload/pic/629e6bbe-8fdc-487c-93d9-06d82ad137f8._orgjpeg') {
@@ -147,15 +147,16 @@ const loadData = () => {
       el.value.push(api[i].album_file);
     }
   }
-
+  loading.value = false;
 }
+
 onMounted(() => {
-  loadData();
-  // loading.value = false;
+  loadData(200);
 });
 //Loading中
 const loading = ref(true);
 //移除最上面圖片
+
 function removeTopImg() {
   el.value.pop();
 }
@@ -270,26 +271,29 @@ function removeTopImg() {
             <p>很抱歉 !</p>
             <p>已沒有單身狗、單身貓了，</p>請嘗試修改篩選條件。
           </span>
+
           <div
             v-for="(value, key) in el"
             class="absolute h-[461.96px] w-[287.84px] translate-y-1 -translate-x-3 -rotate-[15deg] rounded-[32px] border-[12px] border-white bg-bg"
           >
-            <n-image
-              class="absolute rounded-[24px] bg-center bg-cover"
-              :src="value"
-              :key="key"
-              show-toolbar-tooltip
-              alt="petImg"
-            />
-            <button
-              @click="removeTopImg()"
-              class="absolute bottom-0 h-[50px] w-[50px] rounded-full bg-black text-2xl font-medium text-white"
-            >
-              <n-icon size="30" class="flex pt-1">
-                <CloseOutline />
-              </n-icon>
-            </button>
+            <Transition name="slide-fade">
+              <n-image
+                class="absolute rounded-[24px] bg-center bg-cover"
+                :src="value"
+                :key="key"
+                show-toolbar-tooltip
+                alt="petImg"
+              />
+            </Transition>
           </div>
+          <button
+            @click="removeTopImg()"
+            class="absolute -bottom-8 left-16 h-[50px] w-[50px] rounded-full bg-black text-2xl font-medium text-white"
+          >
+            <n-icon size="30" class="flex pt-1">
+              <CloseOutline />
+            </n-icon>
+          </button>
         </div>
       </div>
       <!-- 隨機推薦 -->
@@ -321,4 +325,18 @@ function removeTopImg() {
     </div>
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>
