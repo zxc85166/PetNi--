@@ -1,10 +1,10 @@
 <script setup>
 import ButtonRepoVue from "@/components/ButtonRepo.vue";
-import { AnimalCat24Regular } from "@vicons/fluent";
-import { AnimalDog24Regular } from "@vicons/fluent";
+import { AnimalCat24Regular, AnimalDog24Regular } from "@vicons/fluent";
+import { CloseOutline } from "@vicons/ionicons5";
 import { WomanOutlined, ManOutlined } from "@vicons/antd";
 import { NIcon, NSwitch, NAvatar, NImage } from "naive-ui";
-import { ref, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 
 // import api.json
 import api from "@/assets/api.json";
@@ -15,19 +15,128 @@ const railStyle = ({ checked }) => {
   }
   return style;
 };
-//有無被點擊
-const isClicked = ref(false);
-//點擊篩選按鈕
-function clickFilterBtn(e) {
-  // console.log(e.target.innerHTML);
-  isClicked.value = !isClicked.value;
+
+//我想尋找
+const wantToFind = reactive({ dogs: false, cats: false, any: true });
+function clickFindBtn(e) {
+  switch (e) {
+    case "dogs":
+      wantToFind.dogs = true;
+      wantToFind.cats = false;
+      wantToFind.any = false;
+      break;
+    case "cats":
+      wantToFind.cats = true;
+      wantToFind.dogs = false;
+      wantToFind.any = false;
+      break;
+    case "any":
+      wantToFind.any = true;
+      wantToFind.dogs = false;
+      wantToFind.cats = false;
+      break;
+  }
 }
-const el = ref(null);
-
+//性別
+const gender = reactive({ male: false, female: false, any: true });
+function clickGenderBtn(e) {
+  switch (e) {
+    case "male":
+      gender.male = true;
+      gender.female = false;
+      gender.any = false;
+      break;
+    case "female":
+      gender.female = true;
+      gender.male = false;
+      gender.any = false;
+      break;
+    case "any":
+      gender.any = true;
+      gender.male = false;
+      gender.female = false;
+      break;
+  }
+}
+//年齡
+const catAges = reactive({ 幼齡: false, 成年: false, 不拘: true });
+function clickcatAgeBtn(e) {
+  switch (e) {
+    case "幼齡":
+      catAges.幼齡 = true;
+      catAges.成年 = false;
+      catAges.不拘 = false;
+      break;
+    case "成年":
+      catAges.成年 = true;
+      catAges.幼齡 = false;
+      catAges.不拘 = false;
+      break;
+    case "不拘":
+      catAges.不拘 = true;
+      catAges.幼齡 = false;
+      catAges.成年 = false;
+      break;
+  }
+}
+//重置顏色狀態: false
+function ClearCatColors() {
+  for (const key in catColors) {
+    if (catColors[key] == true) {
+      catColors[key] = false;
+    }
+  }
+}
+//顏色
+const catColors = reactive({ 白貓: false, 黑貓: false, 乳牛貓: false, 橘貓: false, 虎斑貓: false, 三色貓: false, 玳瑁貓: false, 不拘: true });
+function clickCatColorsBtn(e) {
+  switch (e) {
+    case "白貓":
+      ClearCatColors();
+      catColors.白貓 = true;
+      break;
+    case "黑貓":
+      ClearCatColors();
+      catColors.黑貓 = true;
+      break;
+    case "乳牛貓":
+      ClearCatColors();
+      catColors.乳牛貓 = true;
+      break;
+    case "橘貓":
+      ClearCatColors();
+      catColors.橘貓 = true;
+      break;
+    case "虎斑貓":
+      ClearCatColors();
+      catColors.虎斑貓 = true;
+      break;
+    case "三色貓":
+      ClearCatColors();
+      catColors.三色貓 = true;
+      break;
+    case "玳瑁貓":
+      ClearCatColors();
+      catColors.玳瑁貓 = true;
+      break;
+    case "不拘":
+      ClearCatColors();
+      catColors.不拘 = true;
+      break;
+  }
+}
+//api資料
+const el = ref([]);
 onMounted(() => {
-  el.value = api[3].album_file;
-})
+  for (let i = 0; i < 100; i++) {
+    el.value.push(api[i].album_file);
+  }
 
+})
+//移除最上面圖片
+function removeTopImg() {
+  el.value.pop();
+}
 </script>
 
 <template>
@@ -36,51 +145,78 @@ onMounted(() => {
       <!-- 我想尋找 -->
       <section>
         <p class="font-PeNi_black mb-1 mt-2 text-base">我想尋找</p>
-        <button @click="clickFilterBtn($event)" :class="{ 'btn-clicked': isClicked }" class="btn-lg">
+        <button
+          @click="clickFindBtn('dogs')"
+          :class="{ 'btn-clicked': wantToFind.dogs }"
+          class="btn-lg"
+        >
           <n-icon size="36">
             <AnimalCat24Regular />
           </n-icon>
         </button>
-        <button class="btn-lg">
+        <button
+          @click="clickFindBtn('cats')"
+          :class="{ 'btn-clicked': wantToFind.cats }"
+          class="btn-lg"
+        >
           <n-icon size="36">
             <AnimalDog24Regular />
           </n-icon>
         </button>
-        <button class="btn-lg text-4xl">不拘</button>
+        <button
+          @click="clickFindBtn('any')"
+          :class="{ 'btn-clicked': wantToFind.any }"
+          class="btn-lg text-4xl"
+        >不拘</button>
       </section>
       <!-- 性別 -->
       <section>
         <p class="font-PeNi_black mb-1 mt-2 text-base">性別</p>
-        <button class="btn-lg text-PeNi_blue">
+        <button
+          @click="clickGenderBtn('male')"
+          :class="{ 'btn-clicked': gender.male }"
+          class="btn-lg text-PeNi_blue"
+        >
           <n-icon size="36">
             <ManOutlined />
           </n-icon>
         </button>
-        <button class="btn-lg">
+        <button
+          @click="clickGenderBtn('female')"
+          :class="{ 'btn-clicked': gender.female }"
+          class="btn-lg"
+        >
           <n-icon size="36" class="text-PeNi_pink">
             <WomanOutlined />
           </n-icon>
         </button>
-        <button class="btn-lg text-4xl">不拘</button>
+        <button
+          @click="clickGenderBtn('any')"
+          :class="{ 'btn-clicked': gender.any }"
+          class="btn-lg text-4xl"
+        >不拘</button>
       </section>
       <!-- 年齡 -->
       <section>
         <p class="font-PeNi_black mb-1 mt-2 text-base">年齡</p>
-        <button @click="clickFilterBtn($event)" class="btn-sm">幼齡</button>
-        <button class="btn-sm">成年</button>
-        <button class="btn-sm">不拘</button>
+        <button
+          @click="clickcatAgeBtn(key)"
+          v-for="(value, key) in catAges"
+          :key="key"
+          class="btn-sm"
+          :class="{ 'btn-clicked': value }"
+        >{{ key }}</button>
       </section>
       <!-- 顏色 -->
       <section>
         <p class="font-PeNi_black mb-1 mt-2 text-base">顏色</p>
-        <button class="btn-sm">白貓</button>
-        <button class="btn-sm">黑貓</button>
-        <button class="btn-sm">乳牛貓</button>
-        <button class="btn-sm mt-2">橘貓</button>
-        <button class="btn-sm mt-2">虎斑貓</button>
-        <button class="btn-sm mt-2">三色貓</button>
-        <button class="btn-sm mt-2">玳瑁貓</button>
-        <button class="btn-sm mt-2">不拘</button>
+        <button
+          @click="clickCatColorsBtn(key)"
+          v-for="(value, key) in catColors"
+          :key="key"
+          class="btn-sm mt-2"
+          :class="{ 'btn-clicked': value }"
+        >{{ key }}</button>
       </section>
       <!-- 搜尋附近 -->
       <section class="flex items-center justify-between py-3">
@@ -113,7 +249,22 @@ onMounted(() => {
           <div
             class="absolute h-[461.96px] w-[287.84px] translate-y-1 border-[12px] border-white -translate-x-3 -rotate-[15deg] rounded-[32px] bg-white drop-shadow-xl"
           >
-            <n-image class="rounded-[24px]" :src="el" show-toolbar-tooltip alt="petImg" />
+            <n-image
+              v-for="(value, key) in el"
+              class="rounded-[24px] absolute"
+              :src="value"
+              :key="key"
+              show-toolbar-tooltip
+              alt="petImg"
+            />
+            <button
+              @click="removeTopImg()"
+              class="bottom-0 absolute rounded-full bg-black w-[50px] h-[50px] text-white font-medium text-2xl"
+            >
+              <n-icon size="30" class="flex pt-1">
+                <CloseOutline />
+              </n-icon>
+            </button>
           </div>
         </div>
       </div>
