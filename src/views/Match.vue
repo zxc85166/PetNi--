@@ -1,11 +1,11 @@
 <script setup>
-import ButtonRepoVue from "@/components/ButtonRepo.vue";
+import Loading from "@/components/Loading.vue";
 import { AnimalCat24Regular, AnimalDog24Regular } from "@vicons/fluent";
 import { CloseOutline } from "@vicons/ionicons5";
 import { WomanOutlined, ManOutlined } from "@vicons/antd";
 import { NIcon, NSwitch, NAvatar, NImage } from "naive-ui";
-import { ref, reactive, onMounted } from 'vue'
-
+import { ref, reactive, onMounted } from "vue";
+import dogDefault from "@/assets/dogDefault.png";
 // import api.json
 import api from "@/assets/api.json";
 const railStyle = ({ checked }) => {
@@ -88,7 +88,16 @@ function ClearCatColors() {
   }
 }
 //顏色
-const catColors = reactive({ 白貓: false, 黑貓: false, 乳牛貓: false, 橘貓: false, 虎斑貓: false, 三色貓: false, 玳瑁貓: false, 不拘: true });
+const catColors = reactive({
+  白貓: false,
+  黑貓: false,
+  乳牛貓: false,
+  橘貓: false,
+  虎斑貓: false,
+  三色貓: false,
+  玳瑁貓: false,
+  不拘: true,
+});
 function clickCatColorsBtn(e) {
   switch (e) {
     case "白貓":
@@ -127,12 +136,25 @@ function clickCatColorsBtn(e) {
 }
 //api資料
 const el = ref([]);
-onMounted(() => {
-  for (let i = 0; i < 100; i++) {
-    el.value.push(api[i].album_file);
+//載入資料
+const loadData = () => {
+  for (let i = 0; i < 500; i++) {
+    if (api[i].album_file == '') {
+      el.value.push(dogDefault);
+    } else if (api[i].album_file == 'https://asms.coa.gov.tw/amlapp/upload/pic/629e6bbe-8fdc-487c-93d9-06d82ad137f8._orgjpeg') {
+      el.value.push('https://asms.coa.gov.tw/amlapp/upload/pic/629e6bbe-8fdc-487c-93d9-06d82ad137f8_org.jpeg');
+    } else {
+      el.value.push(api[i].album_file);
+    }
   }
 
-})
+}
+onMounted(() => {
+  loadData();
+  // loading.value = false;
+});
+//Loading中
+const loading = ref(true);
 //移除最上面圖片
 function removeTopImg() {
   el.value.pop();
@@ -233,11 +255,13 @@ function removeTopImg() {
         class="mt-2 h-[50px] w-[290px] rounded-2xl bg-PeNi_black text-base font-medium text-white hover:border hover:bg-white hover:text-black"
       >套用</button>
     </div>
-
-    <div class="mx-auto grid place-items-center">
+    <div v-if="loading" class="mx-auto">
+      <Loading />
+    </div>
+    <div v-if="!loading" class="mx-auto grid place-items-center">
       <!-- 卡片 -->
       <div
-        class="pt-11 relative h-[402.48px] w-[231.97px] rotate-[18deg] rounded-[32px] bg-white drop-shadow-xl"
+        class="relative h-[402.48px] w-[231.97px] rotate-[18deg] rounded-[32px] bg-white pt-11 drop-shadow-xl"
       >
         <div
           class="absolute h-[430.24px] w-[253.74px] -translate-y-12 -translate-x-12 -rotate-6 rounded-[32px] bg-white drop-shadow-xl"
@@ -247,11 +271,11 @@ function removeTopImg() {
             <p>已沒有單身狗、單身貓了，</p>請嘗試修改篩選條件。
           </span>
           <div
-            class="absolute h-[461.96px] w-[287.84px] translate-y-1 border-[12px] border-white -translate-x-3 -rotate-[15deg] rounded-[32px] bg-white drop-shadow-xl"
+            v-for="(value, key) in el"
+            class="absolute h-[461.96px] w-[287.84px] translate-y-1 -translate-x-3 -rotate-[15deg] rounded-[32px] border-[12px] border-white bg-bg"
           >
             <n-image
-              v-for="(value, key) in el"
-              class="rounded-[24px] absolute"
+              class="absolute rounded-[24px] bg-center bg-cover"
               :src="value"
               :key="key"
               show-toolbar-tooltip
@@ -259,7 +283,7 @@ function removeTopImg() {
             />
             <button
               @click="removeTopImg()"
-              class="bottom-0 absolute rounded-full bg-black w-[50px] h-[50px] text-white font-medium text-2xl"
+              class="absolute bottom-0 h-[50px] w-[50px] rounded-full bg-black text-2xl font-medium text-white"
             >
               <n-icon size="30" class="flex pt-1">
                 <CloseOutline />
@@ -272,7 +296,7 @@ function removeTopImg() {
       <div>
         <div
           v-for="i in 3"
-          class="bg-white px-3 py-2 h-[70px] w-[247px] shadow-md rounded-[23px] inline-flex mr-5"
+          class="mr-5 inline-flex h-[70px] w-[247px] rounded-[23px] bg-white px-3 py-2 shadow-md"
         >
           <div class="grid items-center">
             <n-avatar
@@ -283,7 +307,7 @@ function removeTopImg() {
           </div>
           <div class="grid grid-rows-2">
             <div class="inline-flex pl-2">
-              <p class="font-black text-xl">157763</p>
+              <p class="text-xl font-black">157763</p>
               <n-icon size="30" class="text-PeNi_pink">
                 <WomanOutlined />
               </n-icon>

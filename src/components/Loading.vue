@@ -3,7 +3,6 @@
     :animationData="BallOfYarnJSON"
     :loop="true"
     :autoplay="true"
-    :direction="1"
     :renderer="'svg'"
     :speed="1"
     :height="200"
