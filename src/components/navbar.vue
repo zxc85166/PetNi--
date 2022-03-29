@@ -2,8 +2,9 @@
 import { NIcon } from "naive-ui";
 import { Hospital } from "@vicons/carbon";
 import { ColorLensOutlined } from "@vicons/material";
-import { Heart16Regular } from "@vicons/fluent";
+import { Heart16Regular, GiftCardAdd24Filled, PersonAccounts24Filled } from "@vicons/fluent";
 import { useRouter } from "vue-router";
+
 const router = useRouter();
 //前往Match頁面
 function goToMatch() {
@@ -39,7 +40,9 @@ function goToAdoption() {
 <template>
     <div class="justify-between flex px-20 py-3 shadow-md drop-shadow-lg relative z-50 w-full">
         <div class="w-[118.11px]">
-            <img src="@/assets/smallLogo.png" alt="smallLogo" />
+            <router-link :to="'/Match'">
+                <img src="@/assets/smallLogo.png" alt="smallLogo" />
+            </router-link>
         </div>
         <div class="inline-flex gap-5 text-PeNi_grey">
             <button
@@ -48,7 +51,7 @@ function goToAdoption() {
                 :class="{ 'text-PeNi_pink': $route.meta.title == 'Match' }"
             >
                 <n-icon size="24">
-                    <Hospital />
+                    <GiftCardAdd24Filled />
                 </n-icon>
                 <span v-if="$route.meta.title == 'Match'" class="ml-3">配對</span>
             </button>
@@ -78,7 +81,7 @@ function goToAdoption() {
                 :class="{ 'text-PeNi_pink': $route.meta.title == 'Adoption' }"
             >
                 <n-icon size="24">
-                    <Hospital />
+                    <PersonAccounts24Filled />
                 </n-icon>
                 <span v-if="$route.meta.title == 'Adoption'" class="ml-3">送養</span>
             </button>

@@ -2,7 +2,7 @@
 import Loading from "@/components/Loading.vue";
 import { AnimalCat24Regular, AnimalDog24Regular } from "@vicons/fluent";
 import { CloseOutline } from "@vicons/ionicons5";
-import { WomanOutlined, ManOutlined } from "@vicons/antd";
+import { WomanOutlined, ManOutlined, HeartFilled } from "@vicons/antd";
 import { NIcon, NSwitch, NAvatar, NImage } from "naive-ui";
 import { ref, reactive, onMounted } from "vue";
 import dogDefault from "@/assets/dogDefault.png";
@@ -150,7 +150,7 @@ const loadData = async (howmuch) => {
 }
 
 onMounted(() => {
-  loadData(200);
+  loadData(20);
 
 });
 //Loading中
@@ -169,8 +169,8 @@ function filterDog() {
 </script>
 
 <template>
-  <div class="flex h-full bg-bg">
-    <div class="w-[413px] bg-bg_match py-5 pl-20 shadow-md drop-shadow-xl">
+  <div class="flex bg-bg h-[91vh]">
+    <div class="w-[413px] z-10 bg-bg_match py-5 pl-20 shadow-md drop-shadow-xl">
       <!-- 我想尋找 -->
       <section>
         <p class="font-PeNi_black mb-1 mt-2 text-base">我想尋找</p>
@@ -277,27 +277,35 @@ function filterDog() {
             <p>很抱歉 !</p>
             <p>已沒有單身狗、單身貓了，</p>請嘗試修改篩選條件。
           </span>
-
-          <div
-            v-for="(item, index) in el"
-            class="absolute h-[461.96px] w-[287.84px] translate-y-1 -translate-x-3 -rotate-[15deg] rounded-[32px] border-[12px] border-white bg-bg"
-          >
-            <Transition name="slide-fade">
+          <TransitionGroup name="slide-fade" tag="div">
+            <div
+              v-for="(item, index) in el"
+              :key="index"
+              class="absolute h-[461.96px] w-[287.84px] translate-y-1 -translate-x-3 -rotate-[15deg] rounded-[32px] border-[12px] border-white bg-bg"
+            >
               <n-image
-                class="rounded-[24px]"
+                class="rounded-[24px] h-full w-full"
                 :src="item.圖"
-                :key="index"
                 show-toolbar-tooltip
                 alt="petImg"
               />
-            </Transition>
-          </div>
+            </div>
+          </TransitionGroup>
           <button
+            v-if="el.length > 0"
             @click="removeTopImg()"
-            class="absolute -bottom-8 left-16 h-[50px] w-[50px] rounded-full bg-black text-2xl font-medium text-white"
+            class="absolute -bottom-8 left-16 h-[50px] w-[50px] rounded-full bg-white text-2xl font-medium text-PeNi_black shadow-md -rotate-[12deg] hover:text-white hover:bg-PeNi_black"
           >
             <n-icon size="30" class="flex pt-1">
               <CloseOutline />
+            </n-icon>
+          </button>
+          <button
+            v-if="el.length > 0"
+            class="absolute bottom-3 -right-11 h-[50px] w-[50px] rounded-full bg-white text-2xl font-medium text-PeNi_pink shadow-md -rotate-[12deg] hover:text-white hover:bg-PeNi_pink"
+          >
+            <n-icon size="30" class="flex pt-1">
+              <HeartFilled />
             </n-icon>
           </button>
         </div>
@@ -337,12 +345,11 @@ function filterDog() {
 }
 
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.8s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
+  transform: translateX(-950px) translateY(200px) rotate(-40deg);
 }
 </style>
