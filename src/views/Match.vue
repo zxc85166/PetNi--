@@ -24,6 +24,7 @@ function clickFindBtn(e) {
       wantToFind.dogs = true;
       wantToFind.cats = false;
       wantToFind.any = false;
+      filterDog();
       break;
     case "cats":
       wantToFind.cats = true;
@@ -140,11 +141,9 @@ const el = ref([]);
 const loadData = async (howmuch) => {
   for (let i = 0; i < howmuch; i++) {
     if (api[i].album_file == '') {
-      el.value.push(dogDefault);
-    } else if (api[i].album_file == 'https://asms.coa.gov.tw/amlapp/upload/pic/629e6bbe-8fdc-487c-93d9-06d82ad137f8._orgjpeg') {
-      el.value.push('https://asms.coa.gov.tw/amlapp/upload/pic/629e6bbe-8fdc-487c-93d9-06d82ad137f8_org.jpeg');
+      el.value.push({ 圖: dogDefault, 種類: api[i].animal_kind });
     } else {
-      el.value.push(api[i].album_file);
+      el.value.push({ 圖: api[i].album_file, 種類: api[i].animal_kind });
     }
   }
   loading.value = false;
@@ -152,13 +151,20 @@ const loadData = async (howmuch) => {
 
 onMounted(() => {
   loadData(200);
+
 });
 //Loading中
 const loading = ref(true);
 //移除最上面圖片
-
 function removeTopImg() {
   el.value.pop();
+}
+//過濾資料-狗
+function filterDog() {
+  const filter = el.value.filter((item) => {
+    return item.種類 == "狗";
+  });
+  el.value = filter;
 }
 </script>
 
@@ -169,8 +175,8 @@ function removeTopImg() {
       <section>
         <p class="font-PeNi_black mb-1 mt-2 text-base">我想尋找</p>
         <button
-          @click="clickFindBtn('dogs')"
-          :class="{ 'btn-clicked': wantToFind.dogs }"
+          @click="clickFindBtn('cats')"
+          :class="{ 'btn-clicked': wantToFind.cats }"
           class="btn-lg"
         >
           <n-icon size="36">
@@ -178,8 +184,8 @@ function removeTopImg() {
           </n-icon>
         </button>
         <button
-          @click="clickFindBtn('cats')"
-          :class="{ 'btn-clicked': wantToFind.cats }"
+          @click="clickFindBtn('dogs')"
+          :class="{ 'btn-clicked': wantToFind.dogs }"
           class="btn-lg"
         >
           <n-icon size="36">
@@ -273,14 +279,14 @@ function removeTopImg() {
           </span>
 
           <div
-            v-for="(value, key) in el"
+            v-for="(item, index) in el"
             class="absolute h-[461.96px] w-[287.84px] translate-y-1 -translate-x-3 -rotate-[15deg] rounded-[32px] border-[12px] border-white bg-bg"
           >
             <Transition name="slide-fade">
               <n-image
-                class="absolute rounded-[24px] bg-center bg-cover"
-                :src="value"
-                :key="key"
+                class="rounded-[24px]"
+                :src="item.圖"
+                :key="index"
                 show-toolbar-tooltip
                 alt="petImg"
               />
