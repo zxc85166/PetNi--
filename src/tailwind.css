@@ -14,4 +14,7 @@
   .btn-clicked {
     @apply bg-PeNi_black text-white;
   }
+  .switch-active {
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 bg-PeNi_black text-white;
+  }
 }
