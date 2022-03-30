@@ -9,7 +9,7 @@ function goToMatch() {
   })
 }
 onMounted(() => {
-  setInterval(() => {
+  setTimeout(() => {
     goToMatch();
   }, 2000);
 })
