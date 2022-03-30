@@ -1,4 +1,5 @@
 import NotFound from "@/views/NotFound.vue";
+import Theme_Pavilion from "@/views/Theme_Pavilion.vue";
 
 /** @type {import('vue-router').RouterOptions['routes']} */
 export const routes = [
@@ -20,7 +21,7 @@ export const routes = [
   {
     path: "/theme_Pavilion",
     meta: { title: "Theme_Pavilion" },
-    component: () => import("@/views/Theme_Pavilion.vue"),
+    component: Theme_Pavilion,
   },
   {
     path: "/emergency",

@@ -4,7 +4,7 @@ import { AnimalCat24Regular, AnimalDog24Regular } from "@vicons/fluent";
 import { CloseOutline } from "@vicons/ionicons5";
 import { WomanOutlined, ManOutlined, HeartFilled } from "@vicons/antd";
 import { NIcon, NSwitch, NAvatar, NImage } from "naive-ui";
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, onBeforeMount } from "vue";
 import dogDefault from "@/assets/dogDefault.png";
 // import api.json
 import api from "@/assets/api.json";
@@ -146,12 +146,13 @@ const loadData = async (howmuch) => {
       el.value.push({ 圖: api[i].album_file, 種類: api[i].animal_kind });
     }
   }
-  loading.value = false;
 }
 
-onMounted(() => {
+onBeforeMount(() => {
   loadData(20);
+  loading.value = false;
 });
+
 //Loading中
 const loading = ref(true);
 //移除最上面圖片

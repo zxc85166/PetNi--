@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class>
+  <div class="w-full h-sreen">
     <div class="mx-auto grid h-screen place-items-center">
       <img src="@/assets/homeDog.gif" alt="logo" class="bg-current" />
       <div class="fixed bottom-5">
