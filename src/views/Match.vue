@@ -151,7 +151,6 @@ const loadData = async (howmuch) => {
 
 onMounted(() => {
   loadData(20);
-
 });
 //Loading中
 const loading = ref(true);

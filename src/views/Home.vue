@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from "vue-router";
-
+import { onMounted } from 'vue';
 const router = useRouter();
 //前往Match頁面
 function goToMatch() {
@@ -8,9 +8,13 @@ function goToMatch() {
     path: '/match',
   })
 }
-setInterval(() => {
-  goToMatch();
-}, 2000);
+onMounted(() => {
+  setInterval(() => {
+    goToMatch();
+  }, 2000);
+})
+
+
 </script>
 
 <template>
