@@ -2,13 +2,7 @@
 import { ref } from "vue";
 import { NIcon } from "naive-ui";
 import { GreaterThanOutlined, LessThanOutlined } from "@vicons/material";
-import 三花貓 from "/Theme_Pavilion_pics/三花貓.png";
-import 白貓 from "/Theme_Pavilion_pics/白貓.png";
-import 乳牛貓 from "/Theme_Pavilion_pics/乳牛貓.png";
-import 虎斑貓 from "/Theme_Pavilion_pics/虎斑貓.png";
-import 玳瑁貓 from "/Theme_Pavilion_pics/玳瑁貓.png";
-import 黑貓 from "/Theme_Pavilion_pics/黑貓.png";
-import 橘貓 from "/Theme_Pavilion_pics/橘貓.png";
+
 import 三色犬 from "/Theme_Pavilion_pics/三色犬.png";
 import 紅棕犬 from "/Theme_Pavilion_pics/紅棕犬.png";
 import 黃犬 from "/Theme_Pavilion_pics/黃犬.png";
@@ -30,7 +24,7 @@ function switchStateChange(type) {
         switchState.value = false;
     }
 }
-const catImgs = [橘貓, 三花貓, 白貓, 黑貓, 乳牛貓, 虎斑貓, 玳瑁貓];
+const catImgs = ['/Theme_Pavilion_pics/橘貓.png', '/Theme_Pavilion_pics/三花貓.png', '/Theme_Pavilion_pics/白貓.png', '/Theme_Pavilion_pics/黑貓.png', '/Theme_Pavilion_pics/乳牛貓.png', '/Theme_Pavilion_pics/虎斑貓.png', '/Theme_Pavilion_pics/玳瑁貓.png'];
 const catInfos = ['個性膽小、貪吃、愛講話，十隻橘貓九隻胖，另一隻...超胖。', '個性黏人、愛撒嬌，因為遺傳基因的關係，99%以上都是母貓。', '優雅乖巧、個性獨立。撒嬌時，會輕聲喵喵叫，或是輕拍主人討摸摸。', '反差萌、愛撒嬌、聰明、貼心、學習力強、會認人，對牠好，牠會記在心裡。', '貓界的哈士奇、個性好動，容易跟其他貓打成一片。', '野性美、狩獵高手、傲嬌脾氣、警戒心強，一旦被牠認定，就會很依賴主子。', '個性善良、脾氣最好、愛撒嬌、不挑食，99%以上都是母貓，親人也親貓。'];
 const catNames = ['橘貓', '三花貓', '白貓', '黑貓', '乳牛貓', '虎斑貓', '玳瑁貓'];
 const dogImgs = [三色犬, 紅棕犬, 黃犬, 白犬, 黑犬, 雙色犬, 虎斑犬, 灰犬];
