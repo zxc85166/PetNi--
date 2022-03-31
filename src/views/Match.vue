@@ -147,7 +147,6 @@ const loadData = async (howmuch) => {
     }
   }
 }
-
 onBeforeMount(() => {
   loadData(20);
   loading.value = false;
@@ -169,7 +168,7 @@ function filterDog() {
 </script>
 
 <template>
-  <div class="flex bg-bg h-[91vh]">
+  <div class="flex bg-bg h-screen">
     <div class="w-[413px] z-10 bg-bg_match py-5 pl-20 shadow-md drop-shadow-xl">
       <!-- 我想尋找 -->
       <section>
