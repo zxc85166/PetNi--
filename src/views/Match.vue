@@ -7,7 +7,7 @@ import { NIcon, NSwitch, NAvatar, NImage } from "naive-ui";
 import { ref, reactive, onMounted, onBeforeMount } from "vue";
 import dogDefault from "@/assets/dogDefault.png";
 // import api.json
-import api from "@/assets/api.json";
+// import api from "@/assets/api.json";
 const railStyle = ({ checked }) => {
   const style = {};
   if (checked) {
