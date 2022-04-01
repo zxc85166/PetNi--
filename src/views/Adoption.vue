@@ -21,7 +21,7 @@ const showModal = ref(false);
         <!-- modal -->
         <n-modal v-model:show="showModal" transform-origin="center">
             <div
-                class="grid place-items-center w-[466px] bg-white h-[240px] shadow rounded-3xl text-center font-black py-11"
+                class="grid place-items-center w-[466px] bg-white h-[240px] rounded-3xl text-center font-black py-11"
             >
                 <p class="text-lg">請登入帳號，才能發送養文</p>
 

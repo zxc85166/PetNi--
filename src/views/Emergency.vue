@@ -53,7 +53,7 @@ onMounted(() => {
 })
 </script>
 <template >
-    <div class="bg-bg w-full px-[88px] gap-3 py-10">
+    <div class="bg-bg min-h-screen w-full px-[88px] gap-3 py-10">
         <div class="text-center font-black text-lg flex justify-center gap-3">
             <button
                 @click="toggleActiveBtn('北部')"
@@ -91,7 +91,7 @@ onMounted(() => {
                 >
                     <div>
                         <p class="font-black text-lg">{{ item.院名 }}</p>
-                        <p class="text-base font-bold">{{ item.電話 }}</p>
+                        <p :href="'tel:' + item.電話" class="text-base font-bold">{{ item.電話 }}</p>
                         <p class="text-base font-bold">{{ item.地址 }}</p>
                     </div>
                     <div class="grid content-around">
