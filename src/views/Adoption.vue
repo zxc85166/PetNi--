@@ -26,14 +26,14 @@ const showModal = ref(false);
                 <p class="text-lg">請登入帳號，才能發送養文</p>
 
                 <button
-                    class="bg-PeNi_black text-white rounded-lg w-[236px] h-[46px] gap-4 flex justify-center items-center"
+                    class="bg-PeNi_black text-white rounded-lg hover:bg-PeNi_blue w-[236px] h-[46px] gap-4 flex justify-center items-center"
                 >
                     <img src="@/assets/google.png" alt="google login icon" />
                     <p>Google 登入</p>
                 </button>
                 <button
                     @click="showModal = false"
-                    class="bg-PeNi_grey_light rounded-lg w-[236px] font-black h-[46px]"
+                    class="bg-PeNi_grey_light rounded-lg w-[236px] hover:bg-PeNi_black hover:text-white font-black h-[46px]"
                 >取 消</button>
             </div>
         </n-modal>
