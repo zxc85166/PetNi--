@@ -53,7 +53,7 @@ onMounted(() => {
 })
 </script>
 <template >
-    <div class="bg-bg w-full h-screen px-[88px] gap-3 py-10">
+    <div class="bg-bg w-full px-[88px] gap-3 py-10">
         <div class="text-center font-black text-lg flex justify-center gap-3">
             <button
                 @click="toggleActiveBtn('北部')"
