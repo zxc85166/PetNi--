@@ -91,7 +91,7 @@ onMounted(() => {
                 >
                     <div>
                         <p class="font-black text-lg">{{ item.院名 }}</p>
-                        <p :href="'tel:' + item.電話" class="text-base font-bold">{{ item.電話 }}</p>
+                        <a :href="'tel:+886-' + item.電話" class="text-base font-bold">{{ item.電話 }}</a>
                         <p class="text-base font-bold">{{ item.地址 }}</p>
                     </div>
                     <div class="grid content-around">
