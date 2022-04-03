@@ -6,13 +6,15 @@ import { Heart16Regular, GiftCardAdd24Filled, PersonAccounts24Filled } from "@vi
 
 </script>
 <template>
-    <div class="justify-between flex px-20 py-3 shadow-md drop-shadow-lg relative z-50 w-full">
-        <div class="w-[118.11px]">
+    <div
+        class="flex items-center justify-around px-2 py-3 shadow-md drop-shadow-lg relative z-50 w-full"
+    >
+        <div class="w-[118.11px] hidden lg:flex">
             <router-link :to="'/match'">
                 <img src="@/assets/smallLogo.png" alt="smallLogo" />
             </router-link>
         </div>
-        <div class="inline-flex gap-5 text-PeNi_grey">
+        <div class="inline-flex mx-auto lg:mx-0 gap-9 md:gap-24 text-PeNi_grey">
             <div class="routeIcon" :class="{ 'text-PeNi_pink': $route.meta.title == 'Match' }">
                 <router-link :to="'/match'">
                     <n-icon size="24">

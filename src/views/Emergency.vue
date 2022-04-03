@@ -52,8 +52,8 @@ onMounted(() => {
     data.value = northern;
 })
 </script>
-<template >
-    <div class="bg-bg min-h-screen w-full px-[88px] gap-3 py-10">
+<template>
+    <div class="bg-bg min-h-screen w-full p-4 lg:px-[88px] gap-3 lg:py-10">
         <div class="text-center font-black text-lg flex justify-center gap-3">
             <button
                 @click="toggleActiveBtn('北部')"
@@ -84,7 +84,7 @@ onMounted(() => {
                 </n-icon>
                 <p class="text-2xl pl-1 font-black">{{ index }}</p>
             </div>
-            <div class="grid grid-cols-3 gap-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                 <div
                     v-for="(item, index) in region"
                     class="bg-white h-[104px] flex justify-between items-center rounded-[20px] p-3 shadow w-full"

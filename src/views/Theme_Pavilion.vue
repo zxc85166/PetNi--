@@ -59,18 +59,39 @@ function changeImg(type) {
 </script>
 <template>
     <div class="bg-bg w-full h-screen grid grid-cols-2 place-items-center">
-        <span class="text-[324px] z-10 absolute font-black text-white">貓</span>
+        <span
+            v-if="!switchState"
+            class="text-[324px] hidden lg:flex z-10 absolute font-black text-white"
+        >狗</span>
+        <span v-else class="text-[324px] z-10 absolute font-black text-white">貓</span>
         <div class="col-span-1">
-            <p v-if="switchState" class="text-8xl font-bold">{{ showCatName }}</p>
-            <p v-else class="text-8xl font-bold">{{ showDogName }}</p>
+            <p v-if="switchState" class="text-8xl font-black">{{ showCatName }}</p>
+            <p v-else class="text-8xl font-black">{{ showDogName }}</p>
             <p
                 v-if="switchState"
-                class="text-lg pt-14 font-black text-PeNi_grey w-3/4 leading-7 tracking-wider"
+                class="text-lg pt-12 font-bold text-PeNi_grey w-3/4 leading-7 tracking-wider"
             >{{ showCatInfo }}</p>
             <p
                 v-else
-                class="text-lg pt-14 font-black text-PeNi_grey w-3/4 leading-7 tracking-wider"
+                class="text-lg pt-12 font-bold text-PeNi_grey w-3/4 leading-7 tracking-wider"
             >{{ showDogInfo }}</p>
+            <div
+                class="bg-white shadow h-[46px] w-[196px] py-1 px-[10px] rounded-2xl mt-10 font-bold flex items-center text-lg"
+            >
+                <div class="grow flex justify-center">搜尋{{ showDogName }}</div>
+                <div class="flex-none">
+                    <svg width="40" height="40" viewBox="0 0 24 24">
+                        <g fill="none">
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2zm-1 5a4 4 0 1 0 2.032 7.446l1.76 1.761a1 1 0 0 0 1.415-1.414l-1.761-1.761A4 4 0 0 0 11 7zm0 6a2 2 0 1 0 0-4a2 2 0 0 0 0 4z"
+                                fill="currentColor"
+                            />
+                        </g>
+                    </svg>
+                </div>
+            </div>
         </div>
         <div class="z-20 absolute right-1/4">
             <img v-if="switchState" :src="showCatImg" alt="貓圖" />
