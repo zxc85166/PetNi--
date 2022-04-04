@@ -54,7 +54,9 @@ onMounted(() => {
 </script>
 <template>
     <div class="bg-bg min-h-screen w-full p-4 lg:px-[88px] gap-3 lg:py-10">
-        <div class="text-center font-black text-lg flex justify-center gap-3">
+        <div
+            class="text-center bg-white lg:bg-transparent font-black text-lg flex justify-center gap-3"
+        >
             <button
                 @click="toggleActiveBtn('北部')"
                 :class="{ 'btn-emergency-active': activeBtn.北部 }"
@@ -84,15 +86,15 @@ onMounted(() => {
                 </n-icon>
                 <p class="text-2xl pl-1 font-black">{{ index }}</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+            <div class="grid grid-cols-1 lg:pb-0 pb-16 md:grid-cols-2 lg:grid-cols-3 gap-2">
                 <div
                     v-for="(item, index) in region"
                     class="bg-white h-[104px] flex justify-between items-center rounded-[20px] p-3 shadow w-full"
                 >
                     <div>
                         <p class="font-black text-lg">{{ item.院名 }}</p>
-                        <a :href="'tel:+886-' + item.電話" class="text-base font-bold">{{ item.電話 }}</a>
-                        <p class="text-base font-bold">{{ item.地址 }}</p>
+                        <a :href="'tel:+886-' + item.電話" class="font-bold">{{ item.電話 }}</a>
+                        <p class="font-bold">{{ item.地址 }}</p>
                     </div>
                     <div class="grid content-around">
                         <div>

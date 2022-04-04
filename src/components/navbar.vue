@@ -7,7 +7,7 @@ import { Heart16Regular, GiftCardAdd24Filled, PersonAccounts24Filled } from "@vi
 </script>
 <template>
     <div
-        class="flex items-center justify-around px-2 py-3 shadow-md drop-shadow-lg relative z-50 w-full"
+        class="flex items-center fixed bottom-0 bg-white lg:bg-transparent justify-around py-3 shadow-md drop-shadow-lg lg:relative z-50 w-full"
     >
         <div class="w-[118.11px] hidden lg:flex">
             <router-link :to="'/match'">

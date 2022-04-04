@@ -59,11 +59,13 @@ function changeImg(type) {
 </script>
 <template>
     <div class="bg-bg w-full h-screen grid grid-cols-2 place-items-center">
+        <!-- 背景白色浮水印 -->
         <span
             v-if="!switchState"
             class="text-[324px] hidden lg:flex z-10 absolute font-black text-white"
         >狗</span>
         <span v-else class="text-[324px] z-10 absolute font-black text-white">貓</span>
+        <!-- 資訊與品種 -->
         <div class="col-span-1">
             <p v-if="switchState" class="text-8xl font-black">{{ showCatName }}</p>
             <p v-else class="text-8xl font-black">{{ showDogName }}</p>
@@ -75,6 +77,7 @@ function changeImg(type) {
                 v-else
                 class="text-lg pt-12 font-bold text-PeNi_grey w-3/4 leading-7 tracking-wider"
             >{{ showDogInfo }}</p>
+            <!-- 搜尋XX貓犬 -->
             <div
                 class="bg-white shadow h-[46px] w-[196px] py-1 px-[10px] rounded-2xl mt-10 font-bold flex items-center text-lg"
             >
@@ -93,6 +96,7 @@ function changeImg(type) {
                 </div>
             </div>
         </div>
+        <!-- 圖片 -->
         <div class="z-20 absolute right-1/4">
             <img v-if="switchState" :src="showCatImg" alt="貓圖" />
             <img v-else :src="showDogImg" alt="狗圖" />
