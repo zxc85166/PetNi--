@@ -3,10 +3,10 @@
 @tailwind utilities;
 @layer components {
   .btn-lg {
-    @apply mr-[10px] h-[90px] w-[90px] rounded-3xl bg-white  font-semibold   drop-shadow-md hover:bg-PeNi_black  hover:text-white focus:outline-none  focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+    @apply mr-[10px] h-[90px] w-[90px] rounded-3xl bg-white  font-semibold drop-shadow-md hover:bg-PeNi_black  hover:text-white focus:outline-none  focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
   }
   .btn-sm {
-    @apply mr-[10px] h-[40px] w-[90px] rounded-[14px] bg-white  font-semibold   drop-shadow-md hover:bg-PeNi_black  hover:text-white focus:outline-none  focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+    @apply mr-[10px] h-[40px] w-[90px] rounded-[14px] bg-white  font-semibold drop-shadow-md hover:bg-PeNi_black  hover:text-white focus:outline-none  focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
   }
   .routeIcon {
     @apply inline-flex h-12 items-center hover:text-PeNi_pink;
@@ -15,7 +15,7 @@
     @apply bg-PeNi_black text-white;
   }
   .btn-emergency {
-    @apply hover:btn-emergency-active h-[38px] w-[95px] rounded-[10px] bg-white shadow;
+    @apply hover:btn-emergency-active font-black h-[38px] w-[60px] md:w-[90px] lg:w-[95px] rounded-[10px] bg-bg lg:bg-white lg:shadow;
   }
   .btn-emergency-active {
     @apply bg-PeNi_pink text-white;

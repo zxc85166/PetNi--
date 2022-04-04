@@ -58,17 +58,17 @@ function changeImg(type) {
 
 </script>
 <template>
-    <div class="bg-bg w-full h-screen grid grid-cols-2 place-items-center">
+    <div class="bg-bg w-full min-h-screen grid lg:grid-cols-2 place-items-center">
         <!-- 背景白色浮水印 -->
         <span
             v-if="!switchState"
-            class="text-[324px] hidden lg:flex z-10 absolute font-black text-white"
+            class="text-[324px] hidden lg:flex absolute font-black text-white"
         >狗</span>
-        <span v-else class="text-[324px] z-10 absolute font-black text-white">貓</span>
+        <span v-else class="text-[324px] lg:flex absolute font-black text-white">貓</span>
         <!-- 資訊與品種 -->
-        <div class="col-span-1">
-            <p v-if="switchState" class="text-8xl font-black">{{ showCatName }}</p>
-            <p v-else class="text-8xl font-black">{{ showDogName }}</p>
+        <div class="order-2 lg:order-1">
+            <p v-if="switchState" class="text-3xl lg:text-8xl font-black">{{ showCatName }}</p>
+            <p v-else class="text-3xl lg:text-8xl font-black">{{ showDogName }}</p>
             <p
                 v-if="switchState"
                 class="text-lg pt-12 font-bold text-PeNi_grey w-3/4 leading-7 tracking-wider"
@@ -97,11 +97,12 @@ function changeImg(type) {
             </div>
         </div>
         <!-- 圖片 -->
-        <div class="z-20 absolute right-1/4">
+        <div class="z-10 absolute lg:right-1/4">
             <img v-if="switchState" :src="showCatImg" alt="貓圖" />
             <img v-else :src="showDogImg" alt="狗圖" />
         </div>
-        <div class="col-span-1 z-20">
+        <div class="order-1 lg:order-2">
+            <!-- 切換貓狗按鈕 -->
             <div
                 class="inline-flex mb-8 cursor-pointer items-center justify-center text-center w-[132px] h-[30px] bg-white rounded-[10px] p-2 shadow-sm"
             >
@@ -116,11 +117,11 @@ function changeImg(type) {
                     class="w-[62px] hover:font-black h-[26px] rounded-[10px] flex items-center justify-center"
                 >汪星人</div>
             </div>
-
-            <div class="pl-5 pt-96">
+            <!-- 切換照片按鈕 -->
+            <div class="pl-5 pt-0 lg:pt-96">
                 <button
                     @click="changeImg('left')"
-                    class="h-[50px] w-[50px] rounded-[14px] bg-white text-2xl font-medium text-PeNi_black shadow-md hover:text-white hover:bg-PeNi_black"
+                    class="h-[50px] w-[50px] lg:static absolute left-4 rounded-[14px] bg-white text-2xl font-medium text-PeNi_black shadow-md hover:text-white hover:bg-PeNi_black"
                 >
                     <n-icon size="30" class="flex pt-1">
                         <LessThanOutlined />
@@ -128,7 +129,7 @@ function changeImg(type) {
                 </button>
                 <button
                     @click="changeImg('right')"
-                    class="h-[50px] w-[50px] ml-7 rounded-[14px] bg-white text-2xl font-medium text-PeNi_black shadow-md hover:text-white hover:bg-PeNi_black"
+                    class="h-[50px] w-[50px] lg:static absolute right-4 ml-7 rounded-[14px] bg-white text-2xl font-medium text-PeNi_black shadow-md hover:text-white hover:bg-PeNi_black"
                 >
                     <n-icon size="30" class="flex pt-1">
                         <GreaterThanOutlined />
