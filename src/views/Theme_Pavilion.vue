@@ -67,7 +67,7 @@ function changeImg(type) {
         >狗</span>
         <span v-else class="text-[324px] hidden lg:flex absolute font-black text-white">貓</span>
         <!-- 資訊與品種 -->
-        <div class="order-2 lg:order-1 px-3">
+        <div class="order-2 z-20 lg:order-1 px-3">
             <p v-if="switchState" class="text-3xl lg:text-8xl font-black">{{ showCatName }}</p>
             <p v-else class="text-3xl lg:text-8xl font-black">{{ showDogName }}</p>
             <p
