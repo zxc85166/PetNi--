@@ -59,27 +59,28 @@ function changeImg(type) {
 </script>
 <template>
     <div class="bg-bg w-full min-h-screen grid lg:grid-cols-2 place-items-center">
+        <div class="bg-white shadow w-full lg:hidden absolute top-0 h-[62px] md:h-[92px]"></div>
         <!-- 背景白色浮水印 -->
         <span
             v-if="!switchState"
             class="text-[324px] hidden lg:flex absolute font-black text-white"
         >狗</span>
-        <span v-else class="text-[324px] lg:flex absolute font-black text-white">貓</span>
+        <span v-else class="text-[324px] hidden lg:flex absolute font-black text-white">貓</span>
         <!-- 資訊與品種 -->
-        <div class="order-2 lg:order-1">
+        <div class="order-2 lg:order-1 px-3">
             <p v-if="switchState" class="text-3xl lg:text-8xl font-black">{{ showCatName }}</p>
             <p v-else class="text-3xl lg:text-8xl font-black">{{ showDogName }}</p>
             <p
                 v-if="switchState"
-                class="text-lg pt-12 font-bold text-PeNi_grey w-3/4 leading-7 tracking-wider"
+                class="text-lg pt-2 lg:pt-12 font-bold text-PeNi_grey leading-7 tracking-wider"
             >{{ showCatInfo }}</p>
             <p
                 v-else
-                class="text-lg pt-12 font-bold text-PeNi_grey w-3/4 leading-7 tracking-wider"
+                class="text-lg pt-2 lg:pt-12 font-bold text-PeNi_grey leading-7 tracking-wider"
             >{{ showDogInfo }}</p>
             <!-- 搜尋XX貓犬 -->
             <div
-                class="bg-white shadow h-[46px] w-[196px] py-1 px-[10px] rounded-2xl mt-10 font-bold flex items-center text-lg"
+                class="bg-white lg:mx-0 mx-auto shadow h-[46px] w-[196px] py-1 px-[10px] rounded-2xl mt-10 font-bold flex items-center text-lg"
             >
                 <div class="grow flex justify-center">搜尋{{ showDogName }}</div>
                 <div class="flex-none">
@@ -97,14 +98,14 @@ function changeImg(type) {
             </div>
         </div>
         <!-- 圖片 -->
-        <div class="z-10 absolute lg:right-1/4">
+        <div class="z-10 absolute h-full lg:right-1/4">
             <img v-if="switchState" :src="showCatImg" alt="貓圖" />
             <img v-else :src="showDogImg" alt="狗圖" />
         </div>
-        <div class="order-1 lg:order-2">
+        <div class="order-1 h-full lg:order-2">
             <!-- 切換貓狗按鈕 -->
             <div
-                class="inline-flex mb-8 cursor-pointer items-center justify-center text-center w-[132px] h-[30px] bg-white rounded-[10px] p-2 shadow-sm"
+                class="inline-flex lg:mt-10 z-20 lg:relative absolute md:top-10 left-36 md:left-[45%] top-5 mb-8 cursor-pointer items-center justify-center text-center w-[132px] h-[30px] bg-white rounded-[10px] p-2 shadow"
             >
                 <div
                     @click="switchStateChange('cat')"
@@ -118,10 +119,10 @@ function changeImg(type) {
                 >汪星人</div>
             </div>
             <!-- 切換照片按鈕 -->
-            <div class="pl-5 pt-0 lg:pt-96">
+            <div class="pl-24 pt-60 lg:pt-96">
                 <button
                     @click="changeImg('left')"
-                    class="h-[50px] w-[50px] lg:static absolute left-4 rounded-[14px] bg-white text-2xl font-medium text-PeNi_black shadow-md hover:text-white hover:bg-PeNi_black"
+                    class="h-[40px] z-30 w-[40px] md:h-[50px] md:w-[50px] lg:relative absolute left-4 rounded-[14px] bg-white text-2xl font-medium text-PeNi_black shadow-md hover:text-white hover:bg-PeNi_black"
                 >
                     <n-icon size="30" class="flex pt-1">
                         <LessThanOutlined />
@@ -129,7 +130,7 @@ function changeImg(type) {
                 </button>
                 <button
                     @click="changeImg('right')"
-                    class="h-[50px] w-[50px] lg:static absolute right-4 ml-7 rounded-[14px] bg-white text-2xl font-medium text-PeNi_black shadow-md hover:text-white hover:bg-PeNi_black"
+                    class="h-[40px] z-30 w-[40px] md:h-[50px] md:w-[50px] lg:relative absolute right-4 ml-10 rounded-[14px] bg-white text-2xl font-medium text-PeNi_black shadow-md hover:text-white hover:bg-PeNi_black"
                 >
                     <n-icon size="30" class="flex pt-1">
                         <GreaterThanOutlined />
