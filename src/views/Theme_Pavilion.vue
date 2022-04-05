@@ -98,7 +98,7 @@ function changeImg(type) {
             </div>
         </div>
         <!-- 圖片 -->
-        <div class="z-10 absolute w-fit lg:right-1/4">
+        <div class="z-10 absolute w-2/3 top-20 lg:w-fit lg:right-1/4">
             <img v-if="switchState" :src="showCatImg" alt="貓圖" />
             <img v-else :src="showDogImg" alt="狗圖" />
         </div>
