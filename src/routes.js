@@ -1,5 +1,7 @@
 import NotFound from "@/views/NotFound.vue";
 import Theme_Pavilion from "@/views/Theme_Pavilion.vue";
+import Emergency from "@/views/Emergency.vue";
+import Adoption from "@/views/Adoption.vue";
 
 /** @type {import('vue-router').RouterOptions['routes']} */
 export const routes = [
@@ -26,12 +28,12 @@ export const routes = [
   {
     path: "/emergency",
     meta: { title: "Emergency" },
-    component: () => import("@/views/Emergency.vue"),
+    component: Emergency,
   },
   {
     path: "/adoption",
     meta: { title: "Adoption" },
-    component: () => import("@/views/Adoption.vue"),
+    component: Adoption,
   },
   { path: "/:path(.*)", component: NotFound },
 ];

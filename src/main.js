@@ -3,6 +3,7 @@ import "./tailwind.css";
 import App from "./App.vue";
 import { routes } from "./routes.js";
 import { createRouter, createWebHistory } from "vue-router";
+import { createPinia } from "pinia";
 
 const app = createApp(App);
 
@@ -15,4 +16,5 @@ meta.name = "naive-ui-style";
 document.head.appendChild(meta);
 
 app.use(router);
+app.use(createPinia());
 app.mount("#app");

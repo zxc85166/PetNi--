@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import { NIcon } from "naive-ui";
-import { GreaterThanOutlined, LessThanOutlined } from "@vicons/material";
 
 const switchState = ref(false);
 //切換switchState
@@ -125,7 +124,23 @@ function changeImg(type) {
                     class="h-[40px] z-30 w-[40px] md:h-[50px] md:w-[50px] lg:relative absolute left-4 rounded-[14px] bg-white text-2xl font-medium text-PeNi_black shadow-md hover:text-white hover:bg-PeNi_black"
                 >
                     <n-icon size="30" class="flex pt-1">
-                        <LessThanOutlined />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            aria-hidden="true"
+                            role="img"
+                            class="iconify iconify--ic"
+                            width="32"
+                            height="32"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                fill="currentColor"
+                                fill-rule="evenodd"
+                                d="M17.5 17.5L9.25 12l8.25-5.5l-1-1.5L6 12l10.5 7z"
+                            />
+                        </svg>
                     </n-icon>
                 </button>
                 <button
@@ -133,7 +148,23 @@ function changeImg(type) {
                     class="h-[40px] z-30 w-[40px] md:h-[50px] md:w-[50px] lg:relative absolute right-4 ml-10 rounded-[14px] bg-white text-2xl font-medium text-PeNi_black shadow-md hover:text-white hover:bg-PeNi_black"
                 >
                     <n-icon size="30" class="flex pt-1">
-                        <GreaterThanOutlined />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            aria-hidden="true"
+                            role="img"
+                            class="iconify iconify--ic"
+                            width="32"
+                            height="32"
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                fill="currentColor"
+                                fill-rule="evenodd"
+                                d="m6.5 17.5l8.25-5.5L6.5 6.5l1-1.5L18 12L7.5 19z"
+                            />
+                        </svg>
                     </n-icon>
                 </button>
             </div>
