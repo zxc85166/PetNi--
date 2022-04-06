@@ -53,7 +53,7 @@ onMounted(() => {
 })
 </script>
 <template>
-    <div class="bg-bg min-h-screen w-full gap-3 lg:py-10">
+    <div class="bg-bg min-h-screen w-full gap-3 lg:py-10 lg:pb-0 pb-20">
         <div
             class="text-center bg-white p-7 shadow lg:shadow-none lg:bg-transparent font-black text-lg flex items-center justify-between lg:justify-center"
         >
@@ -92,7 +92,7 @@ onMounted(() => {
                     </n-icon>
                     <p class="text-2xl pl-1 font-black">{{ index }}</p>
                 </div>
-                <div class="grid grid-cols-1 lg:pb-0 pb-20 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 pb-5 lg:grid-cols-3 gap-2">
                     <div
                         v-for="(item, index) in region"
                         class="bg-white h-[104px] flex justify-between items-center rounded-[20px] p-3 shadow w-full"

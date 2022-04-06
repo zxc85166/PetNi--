@@ -169,7 +169,7 @@ function filterDog() {
 
 <template>
   <div class="flex bg-bg h-screen">
-    <div class="w-[413px] z-10 bg-bg_match py-5 pl-20 shadow-md drop-shadow-xl">
+    <div class="lg:w-[413px] w-full z-10 bg-bg_match py-5 pl-20 shadow-md drop-shadow-xl">
       <!-- 我想尋找 -->
       <section>
         <p class="font-PeNi_black mb-1 mt-2 text-base">我想尋找</p>
