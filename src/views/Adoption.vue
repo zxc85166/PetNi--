@@ -81,7 +81,7 @@ function uploadImage() {
 </script>
 <template>
     <div
-        class="bg-bg w-full h-screen px-[120px] gap-3 py-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6"
+        class="bg-bg w-full h-screen px-4 lg:px-[120px] gap-3 py-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6"
     >
         <div
             class="w-full h-[214px] shadow rounded-[28px] text-center grid place-items-center bg-white text-PeNi_pink"
@@ -109,6 +109,7 @@ function uploadImage() {
             </div>
         </div>
         <div
+            v-if="store.UserEmail"
             v-for="img in imageList"
             class="w-full h-[214px] shadow rounded-[28px] text-center bg-white"
         >
