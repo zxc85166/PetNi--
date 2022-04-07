@@ -131,7 +131,7 @@ function uploadImage() {
                     </button>
                 </div>
                 <div v-if="store.UserEmail">
-                    <input type="file" @change="onFileChanged($event)" accept="image/*" capture />
+                    <input type="file" @change="onFileChanged($event)" accept="image/*" multiple />
                     <button
                         class="bg-PeNi_grey_light rounded-lg w-[236px] hover:bg-PeNi_black hover:text-white font-black h-[46px]"
                         @click="uploadImage()"
