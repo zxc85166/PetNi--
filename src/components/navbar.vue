@@ -1,19 +1,54 @@
 <script setup>
-import { NIcon } from "naive-ui";
+import { NIcon, NAvatar } from "naive-ui";
 // import { storage } from "@/firebase/firebase.js";
 import { useStore } from "@/store/store.js";
 
 const store = useStore();
+const unsubscribe = store.$onAction(({ name, after, onError }) => {
+    if (name === "setUserEmail") {
+        // const startTime = Date.now();
+        // after 會在 action 調用完全返回後才執行
+        // 會等待所有回傳的 promise
+        after((result) => {
 
+            // getData();
+
+            // console.log(
+            //   `Finished "${name}" after ${
+            //     Date.now() - startTime
+            //   }ms.\nResult: ${result}.`
+            // );
+        });
+        // onError 會在 action 報錯時調用
+        onError((error) => {
+            console.warn(
+                `Failed "${name}" after ${Date.now() - startTime}ms.\nError: ${error}.`
+            );
+        });
+    }
+});
 </script>
 <template>
     <div
         class="flex items-center fixed bottom-0 bg-white lg:bg-transparent justify-around py-3 shadow-md drop-shadow-lg lg:relative z-50 w-full"
     >
         <div class="w-[118.11px] hidden lg:flex">
-            <router-link :to="'/match'">
+            <router-link v-if="!store.PhotoURL" :to="'/match'">
                 <img src="@/assets/smallLogo.png" alt="smallLogo" />
             </router-link>
+            <div class="inline-flex items-center" v-else>
+                <n-avatar
+                    round
+                    :size="48"
+                    :src="store.PhotoURL"
+                    alt="google帳號圖"
+                    fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+                />
+                <p
+                    @click="store.clear"
+                    class="font-black pl-3 text-base text-PeNi_pink cursor-pointer hover:text-PeNi_blue"
+                >登出</p>
+            </div>
         </div>
         <div class="inline-flex mx-auto lg:mx-0 gap-9 md:gap-24 text-PeNi_grey">
             <div class="routeIcon" :class="{ 'text-PeNi_pink': $route.meta.title == 'Match' }">

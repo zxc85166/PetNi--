@@ -26,7 +26,7 @@ export const useStore = defineStore({
     setUserEmail(email) {
       this.UserEmail = email;
     },
-    Api(api) {
+    setApi(api) {
       this.Api = api;
     },
   },

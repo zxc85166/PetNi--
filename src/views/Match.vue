@@ -197,7 +197,7 @@ const loadData = async (howmuch) => {
   }
 }
 onBeforeMount(() => {
-  loadData(20);
+  // loadData(20);
   loading.value = false;
 });
 
