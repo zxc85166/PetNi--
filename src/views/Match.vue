@@ -5,57 +5,9 @@ import { ref, reactive, onBeforeMount } from "vue";
 import { useStore } from "@/store/store.js";
 
 import dogDefault from "@/assets/dogDefault.png";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-} from "@firebase/firestore";
-import { db } from "@/firebase.js";
+
 
 const store = useStore();
-
-//使用者填入的新增資料
-const newNote = ref(null);
-const newDate = ref(null);
-const newHeight = ref(null);
-const newWeight = ref(null);
-//抓取資料
-const getData = async () => {
-  const datas = await getDocs(collection(db, store.UserEmail));
-  const data = datas.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-  store.UserData = data;
-};
-//輸入
-const createUser = async () => {
-  await addDoc(collection(db, store.UserEmail), {
-    note: newNote.value,
-    date: newDate.value,
-    height: Number(newHeight.value),
-    weight: Number(newWeight.value),
-  });
-  newNote.value = null;
-  newDate.value = null;
-  newHeight.value = null;
-  newWeight.value = null;
-  getData();
-};
-//修改
-const updateUser = async (id, date, height, weight, note) => {
-  const userDoc = doc(db, store.UserEmail, id);
-  const newFields = { date: date, height: height, weight: weight, note: note };
-  await updateDoc(userDoc, newFields);
-  getData();
-};
-//刪除
-const deleteUser = async (id) => {
-  const userDoc = doc(db, store.UserEmail, id);
-  await deleteDoc(userDoc);
-  getData();
-};
-
 //swich button外觀
 const railStyle = ({ checked }) => {
   const style = {};

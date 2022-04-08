@@ -15,14 +15,20 @@ const dogImgs = ['/Theme_Pavilion_pics/三色犬.png', '/Theme_Pavilion_pics/紅
 
 </script>
 <template >
-    <div class="bg-bg h-screen px-[120px] gap-3 py-10 grid grid-cols-6">
-        <n-card class="w-[162px] h-[214px]" content-style="border-radius: 28px;" :bordered="false">
+    <div
+        class="bg-bg h-screen px-4 lg:px-[120px] gap-3 py-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6"
+    >
+        <n-card
+            v-for="(img, index) in dogImgs"
+            :key="index"
+            class="h-[214px]"
+            content-style="border-radius: 28px;"
+            :bordered="false"
+        >
             <template #cover>
-                <n-image
-                    class="rounded-[24px]"
-                    :src="dogImgs[0]"
-                    show-toolbar-tooltip
-                    alt="petImg"
+                <img
+                    :src="img"
+                    class="shadow rounded-lg max-w-full h-auto align-middle border-none"
                 />
             </template>
             <div class="inline-flex">

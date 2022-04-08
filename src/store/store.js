@@ -10,8 +10,8 @@ export const useStore = defineStore({
     PhotoURL: "",
     //儲存取得資料
     UserData: "",
-    //api資料
-    Api: "",
+    //傳參數-送養寵物照片
+    NowPetPhoto: "",
   }),
   getters: {},
   actions: {
@@ -25,9 +25,6 @@ export const useStore = defineStore({
     //設定UserEmail
     setUserEmail(email) {
       this.UserEmail = email;
-    },
-    setApi(api) {
-      this.Api = api;
     },
   },
   // 開啟資料快取
