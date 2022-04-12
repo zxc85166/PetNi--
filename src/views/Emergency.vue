@@ -51,7 +51,7 @@ onMounted(() => {
 })
 </script>
 <template>
-    <div class="bg-bg min-h-screen w-full gap-3 lg:py-10 lg:pb-0 pb-20">
+    <div class="min-h-screen w-full gap-3 lg:py-10 lg:pb-0 pb-20">
         <div
             class="text-center bg-white p-7 shadow lg:shadow-none lg:bg-transparent font-black text-lg flex items-center justify-between lg:justify-center"
         >

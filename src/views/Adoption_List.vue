@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NIcon, NModal, NImage } from "naive-ui";
+import { NIcon, NModal } from "naive-ui";
 import { useStore } from "@/store/store.js";
 // 註冊 firebase
 import { app, storage } from "@/firebase.js";
@@ -85,7 +85,7 @@ function setImageUrl(url) {
 <template>
     <div class="px-4 lg:px-[120px] gap-3 py-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
         <div
-            class="w-full h-[214px] shadow rounded-[28px] text-center grid place-items-center bg-white text-PeNi_pink"
+            class="w-full shadow rounded-[28px] text-center grid place-items-center bg-white text-PeNi_pink"
         >
             <div @click="showModal = true">
                 <n-icon size="56" class="hover:text-pink-300 cursor-pointer">
@@ -113,13 +113,16 @@ function setImageUrl(url) {
             v-if="store.UserEmail"
             v-for="img in imageList"
             @click="setImageUrl(img.url)"
-            class="w-full justify-center h-[214px] shadow rounded-[28px] text-center bg-white"
+            class="w-full justify-center shadow rounded-[28px] text-center bg-white"
         >
             <router-link to="/adoption/edit">
-                <img
-                    :src="img.url"
-                    class="max-w-full rounded-[28px] h-auto align-middle border-none p-4"
-                />
+                <div class="aspect-w-3 aspect-h-3">
+                    <img
+                        :src="img.url"
+                        class="rounded-[28px] object-cover align-middle border-none p-4"
+                    />
+                </div>
+
                 <div class="inline-flex">
                     <p class="text-xl font-black">157763</p>
                     <n-icon size="30" class="text-PeNi_pink pl-5">

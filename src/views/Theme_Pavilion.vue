@@ -57,7 +57,7 @@ function changeImg(type) {
 
 </script>
 <template>
-    <div class="bg-bg w-full min-h-screen grid lg:grid-cols-2 place-items-center">
+    <div class="w-full min-h-screen grid lg:grid-cols-2 place-items-center">
         <div class="bg-white shadow w-full lg:hidden absolute top-0 h-[62px] md:h-[92px]"></div>
         <!-- 背景白色浮水印 -->
         <span

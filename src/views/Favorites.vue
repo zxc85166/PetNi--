@@ -16,22 +16,13 @@ const dogImgs = ['/Theme_Pavilion_pics/三色犬.png', '/Theme_Pavilion_pics/紅
 </script>
 <template >
     <div
-        class="bg-bg h-screen px-4 lg:px-[120px] gap-3 py-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6"
+        class="h-screen px-4 lg:px-[120px] gap-3 py-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6"
     >
-        <n-card
-            v-for="(img, index) in dogImgs"
-            :key="index"
-            class="h-[214px]"
-            content-style="border-radius: 28px;"
-            :bordered="false"
-        >
-            <template #cover>
-                <img
-                    :src="img"
-                    class="shadow rounded-lg max-w-full h-auto align-middle border-none"
-                />
-            </template>
-            <div class="inline-flex">
+        <div v-for="(img, index) in dogImgs" :key="index" class="shadow rounded-lg grid">
+            <div class="aspect-w-2 aspect-h-3">
+                <img :src="img" class="rounded-lg object-cover align-middle border-none" />
+            </div>
+            <div class="inline-flex mx-auto">
                 <p class="text-xl font-black">157763</p>
                 <n-icon size="30" class="text-PeNi_pink pl-5">
                     <svg
@@ -52,10 +43,10 @@ const dogImgs = ['/Theme_Pavilion_pics/三色犬.png', '/Theme_Pavilion_pics/紅
                     </svg>
                 </n-icon>
             </div>
-            <div class="pt-1">
+            <div class="pt-1 mx-auto">
                 <p class="text-PeNi_grey">臺南市南區</p>
             </div>
-        </n-card>
+        </div>
     </div>
 </template>
 

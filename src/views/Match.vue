@@ -1,13 +1,29 @@
 <script setup>
 import Loading from "@/components/Loading.vue";
 import { NIcon, NSwitch, NAvatar, NImage } from "naive-ui";
-import { ref, reactive, onBeforeMount } from "vue";
+import { ref, reactive, onBeforeMount, onMounted } from "vue";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "@firebase/firestore";
+import { db } from "@/firebase.js";
 import { useStore } from "@/store/store.js";
 
 import dogDefault from "@/assets/dogDefault.png";
 
 
 const store = useStore();
+
+//抓取資料
+const getData = async () => {
+  const datas = await getDocs(collection(db, store.UserEmail));
+  const data = datas.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  store.AllData = data;
+};
 //swich button外觀
 const railStyle = ({ checked }) => {
   const style = {};
@@ -139,20 +155,16 @@ function clickCatColorsBtn(e) {
 //api資料
 const el = ref([]);
 //載入資料
-const loadData = async (howmuch) => {
-  for (let i = 0; i < howmuch; i++) {
-    if (api[i].album_file == '') {
-      el.value.push({ 圖: dogDefault, 種類: api[i].animal_kind });
-    } else {
-      el.value.push({ 圖: api[i].album_file, 種類: api[i].animal_kind });
-    }
-  }
+const loadData = async () => {
+
 }
 onBeforeMount(() => {
-  // loadData(20);
+  getData();
   loading.value = false;
 });
-
+onMounted(() => {
+  console.log(store.AllData);
+});
 //Loading中
 const loading = ref(true);
 //移除最上面圖片
@@ -169,7 +181,7 @@ function filterDog() {
 </script>
 
 <template>
-  <div class="flex bg-bg h-screen">
+  <div class="flex h-screen">
     <div class="lg:w-[413px] w-full z-10 bg-bg_match py-5 pl-20 shadow-md drop-shadow-xl">
       <!-- 我想尋找 -->
       <section>

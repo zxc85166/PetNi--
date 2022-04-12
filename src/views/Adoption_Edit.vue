@@ -1,7 +1,7 @@
 <script setup>
 import { ref, reactive } from "vue";
 import { useStore } from "@/store/store.js";
-import { NIcon, NSelect } from "naive-ui";
+import { NIcon } from "naive-ui";
 
 import {
     collection,
@@ -15,6 +15,20 @@ import { db } from "@/firebase.js";
 
 const store = useStore();
 
+//使用者填入的新增資料
+const newPicUrl = ref(null);
+const newCatsOrDog = ref(null);
+const newGender = ref(null);
+const newAge = ref(null);
+const newName = ref(null);
+const newColor = ref(null);
+const newContact = ref(null);
+const newCity = ref(null);
+const newDistrict = ref(null);
+const newCondition = ref(null);
+
+//顯示未填寫警告
+const showWarning = ref(false);
 //狗或貓
 const catsOrDog = reactive({ dogs: false, cats: false });
 const gender = reactive({ male: false, female: false, unknown: false });
@@ -24,37 +38,44 @@ function clickFindBtn(e) {
         case "dogs":
             catsOrDog.dogs = true;
             catsOrDog.cats = false;
+            newCatsOrDog.value = "狗";
             break;
         case "cats":
             catsOrDog.cats = true;
             catsOrDog.dogs = false;
+            newCatsOrDog.value = "貓";
             break;
         case "male":
             gender.male = true;
             gender.female = false;
             gender.unknown = false;
+            newGender.value = "male";
             break;
         case "female":
             gender.male = false;
             gender.female = true;
             gender.unknown = false;
+            newGender.value = "female";
             break;
         case "unknown":
             gender.male = false;
             gender.female = false;
             gender.unknown = true;
+            newGender.value = "性別不明";
             break;
         case "young":
             age.young = true;
             age.adult = false;
+            newAge.value = "幼齡";
             break;
         case "adult":
             age.young = false;
             age.adult = true;
+            newAge.value = "成年";
             break;
     }
 }
-//顏色
+//貓的毛色
 const catColors = reactive({
     白貓: false,
     黑貓: false,
@@ -63,9 +84,20 @@ const catColors = reactive({
     虎斑貓: false,
     三色貓: false,
     玳瑁貓: false,
-    灰白貓: true,
+    灰白貓: false,
 });
-//重置顏色狀態: false
+//狗的毛色
+const dogColors = reactive({
+    白犬: false,
+    黑犬: false,
+    紅棕犬: false,
+    雙色犬: false,
+    三色犬: false,
+    黃犬: false,
+    虎斑犬: false,
+    灰犬: false,
+});
+//重置貓的毛色狀態: false
 function ClearCatColors() {
     for (const key in catColors) {
         if (catColors[key] == true) {
@@ -73,9 +105,19 @@ function ClearCatColors() {
         }
     }
 }
+//重置狗的毛色狀態: false
+function ClearDogColors() {
+    for (const key in dogColors) {
+        if (dogColors[key] == true) {
+            dogColors[key] = false;
+        }
+    }
+}
+
 //更改catColors的值
 function clickColorBtn(e) {
     const text = e.target.innerText;
+    newColor.value = text;
     switch (text) {
         case "白貓":
             ClearCatColors()
@@ -109,97 +151,88 @@ function clickColorBtn(e) {
             ClearCatColors()
             catColors.灰白貓 = true;
             break;
+        case "白犬":
+            ClearDogColors()
+            dogColors.白犬 = true;
+            break;
+        case "黑犬":
+            ClearDogColors()
+            dogColors.黑犬 = true;
+            break;
+        case "紅棕犬":
+            ClearDogColors()
+            dogColors.紅棕犬 = true;
+            break;
+        case "雙色犬":
+            ClearDogColors()
+            dogColors.雙色犬 = true;
+            break;
+        case "三色犬":
+            ClearDogColors()
+            dogColors.三色犬 = true;
+            break;
+        case "黃犬":
+            ClearDogColors()
+            dogColors.黃犬 = true;
+            break;
+        case "虎斑犬":
+            ClearDogColors()
+            dogColors.虎斑犬 = true;
+            break;
+        case "灰犬":
+            ClearDogColors()
+            dogColors.灰犬 = true;
+            break;
     }
 }
-//選擇縣市
-const selectValue = ref(null);
-const options = [
-    {
-        label: "Everybody's Got Something to Hide Except Me and My Monkey",
-        value: "song0",
-        disabled: true
-    },
-    {
-        label: "Drive My Car",
-        value: "song1"
-    },
-    {
-        label: "Norwegian Wood",
-        value: "song2"
-    },
-    {
-        label: "You Won't See",
-        value: "song3",
-        disabled: true
-    },
-    {
-        label: "Nowhere Man",
-        value: "song4"
-    },
-    {
-        label: "Think For Yourself",
-        value: "song5"
-    },
-    {
-        label: "The Word",
-        value: "song6"
-    },
-    {
-        label: "Michelle",
-        value: "song7",
-        disabled: true
-    },
-    {
-        label: "What goes on",
-        value: "song8"
-    },
-    {
-        label: "Girl",
-        value: "song9"
-    },
-    {
-        label: "I'm looking through you",
-        value: "song10"
-    },
-    {
-        label: "In My Life",
-        value: "song11"
-    },
-    {
-        label: "Wait",
-        value: "song12"
-    }
-]
-//使用者填入的新增資料
-const newNote = ref(null);
-const newDate = ref(null);
-const newHeight = ref(null);
-const newWeight = ref(null);
+
+
 
 //抓取資料
 const getData = async () => {
     const datas = await getDocs(collection(db, store.UserEmail));
     const data = datas.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    store.UserData = data;
+    store.AllData = data;
 };
 //輸入
-const createUser = async () => {
+const publishBtn = () => {
+    newPicUrl.value = store.PhotoURL;
+    if (!newCatsOrDog.value || !newGender.value || !newAge.value || !newColor.value || !newContact.value || !newCity.value || !newDistrict.value) {
+        showWarning.value = true;
+        return;
+    }
+    createData();
+}
+const createData = async () => {
     await addDoc(collection(db, store.UserEmail), {
-        note: newNote.value,
-        date: newDate.value,
-        height: Number(newHeight.value),
-        weight: Number(newWeight.value),
+        // Age: Number(newAge.value),
+        PicUrl: newPicUrl.value,
+        CatsOrDog: newCatsOrDog.value,
+        Gender: newGender.value,
+        Age: newAge.value,
+        Name: newName.value,
+        Color: newColor.value,
+        Contact: newContact.value,
+        City: newCity.value,
+        District: newDistrict.value,
+        Condtion: newCondition.value,
     });
-    newNote.value = null;
-    newDate.value = null;
-    newHeight.value = null;
-    newWeight.value = null;
-    getData();
+    newPicUrl.value = null;
+    newCatsOrDog.value = null;
+    newGender.value = null;
+    newAge.value = null;
+    newName.value = null;
+    newColor.value = null;
+    newContact.value = null;
+    newCity.value = null;
+    newDistrict.value = null;
+    newCondition.value = null;
+    showWarning.value = false;
 };
 //修改
-const updateUser = async (id, date, height, weight, note) => {
+const updateUser = async (id, CatsOrDog, Gender, Age, Name) => {
     const userDoc = doc(db, store.UserEmail, id);
-    const newFields = { date: date, height: height, weight: weight, note: note };
+    const newFields = { CatsOrDog: CatsOrDog, Gender: Gender, Age: Age, Name: Name };
     await updateDoc(userDoc, newFields);
     getData();
 };
@@ -213,19 +246,21 @@ const deleteUser = async (id) => {
 
 <template>
     <div class="px-4 lg:px-[128px] lg:py-16 md:py-12 py-7 font-bold text-base">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            <div class="bg-white rounded-[28px] p-4 shadow">
-                <div>
-                    <img
-                        :src="store.NowPetPhoto"
-                        class="rounded-[30px] h-auto align-middle border-none"
-                    />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 gap-3">
+            <div class="flex flex-col gap-3 lg:col-span-2">
+                <div class="bg-white rounded-[28px] p-4 shadow">
+                    <div class="aspect-w-3 aspect-h-3">
+                        <img
+                            :src="store.NowPetPhoto"
+                            class="rounded-[30px] object-cover align-middle border-none"
+                        />
+                    </div>
+                    <button
+                        class="w-full text-white py-[13px] hover:bg-white hover:text-PeNi_pink hover:ring-2 hover:ring-PeNi_pink mt-3 bg-PeNi_pink rounded-2xl"
+                    >替換照片</button>
                 </div>
-                <button
-                    class="w-full text-white py-[13px] hover:bg-white hover:text-PeNi_pink hover:ring-2 hover:ring-PeNi_pink mt-3 bg-PeNi_pink rounded-2xl"
-                >替換照片</button>
             </div>
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-3 lg:col-span-3">
                 <div class="bg-white rounded-[28px] p-4 w-full shadow">
                     <div class="flex justify-between">
                         <div>
@@ -378,13 +413,17 @@ const deleteUser = async (id) => {
                         <p class="pb-2">牠的名字</p>
                         <div class="gap-3 grid">
                             <input
+                                v-model="newName"
                                 class="bg-bg py-2 px-3 rounded-[14px] placeholder:text-PeNi_grey_light placeholder:font-black"
                                 placeholder="若尚未取名可不填"
                             />
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-[28px] p-4 w-full shadow">
+                <div
+                    v-if="catsOrDog.cats || catsOrDog.dogs"
+                    class="bg-white rounded-[28px] p-4 w-full shadow"
+                >
                     <div>
                         <p class="pb-2">
                             毛色
@@ -392,7 +431,17 @@ const deleteUser = async (id) => {
                         </p>
                         <div class="gap-3 grid grid-cols-3 justify-around">
                             <button
+                                v-if="catsOrDog.cats"
                                 v-for="(value, key) in catColors"
+                                @click="clickColorBtn($event)"
+                                :class="{ 'btn-adoption-active': value }"
+                                class="btn-adoption"
+                            >
+                                <p class="font-black">{{ key }}</p>
+                            </button>
+                            <button
+                                v-if="catsOrDog.dogs"
+                                v-for="(value, key) in dogColors"
                                 @click="clickColorBtn($event)"
                                 :class="{ 'btn-adoption-active': value }"
                                 class="btn-adoption"
@@ -403,7 +452,7 @@ const deleteUser = async (id) => {
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-3 lg:col-span-3">
                 <div class="bg-white rounded-[28px] p-4 w-full shadow">
                     <div>
                         <p class="pb-2">
@@ -412,21 +461,20 @@ const deleteUser = async (id) => {
                         </p>
                         <div class="gap-3 grid">
                             <input
+                                v-model="newContact"
                                 class="bg-bg py-2 px-3 rounded-[14px] placeholder:text-PeNi_grey_light placeholder:font-black"
                                 placeholder="聯絡方式 (電話、通訊等…)"
                             />
-                            <div class="grid grid-cols-2">
-                                <n-select
-                                    v-model:value="selectValue"
-                                    filterable
-                                    tag
-                                    :options="options"
+                            <div class="grid grid-cols-2 gap-2">
+                                <input
+                                    v-model="newCity"
+                                    class="bg-bg py-2 px-3 rounded-[14px] placeholder:text-PeNi_grey_light placeholder:font-black"
+                                    placeholder="輸入縣市"
                                 />
-                                <n-select
-                                    v-model:value="selectValue"
-                                    filterable
-                                    tag
-                                    :options="options"
+                                <input
+                                    v-model="newDistrict"
+                                    class="bg-bg py-2 px-3 rounded-[14px] placeholder:text-PeNi_grey_light placeholder:font-black"
+                                    placeholder="輸入區別"
                                 />
                             </div>
                         </div>
@@ -437,6 +485,7 @@ const deleteUser = async (id) => {
                         <p class="pb-2">狀況</p>
                         <div class="gap-3 grid">
                             <textarea
+                                v-model="newCondition"
                                 maxlength="40"
                                 class="bg-bg py-2 px-3 rounded-[14px] border-0 placeholder:text-PeNi_grey_light placeholder:font-black"
                                 placeholder="限40字"
@@ -446,8 +495,15 @@ const deleteUser = async (id) => {
                     </div>
                 </div>
                 <div>
-                    <button class="bg-PeNi_black w-full rounded-2xl text-white p-5">發佈</button>
+                    <button
+                        @click="publishBtn"
+                        class="bg-PeNi_black w-full rounded-2xl text-white p-5"
+                    >發佈</button>
                 </div>
+                <p v-if="showWarning" class="text-PeNi_pink text-lg">
+                    *必填項目尚未填寫完，
+                    請填寫完整後再發佈。
+                </p>
             </div>
         </div>
     </div>

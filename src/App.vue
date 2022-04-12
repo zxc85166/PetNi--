@@ -7,7 +7,7 @@ import navbar from "@/components/navbar.vue";
   <header v-if="$route.meta.title !== 'Home'">
     <navbar />
   </header>
-  <div>
+  <div class="bg-bg">
     <main>
       <router-view />
     </main>

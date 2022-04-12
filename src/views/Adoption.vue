@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="bg-bg w-full h-screen">
+    <div class="w-full h-screen">
         <router-view />
     </div>
 </template>
