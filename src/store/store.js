@@ -14,6 +14,8 @@ export const useStore = defineStore({
     NowPetPhoto: "",
     //所有資料
     AllData: "",
+    //當前資料
+    NowPetData: "",
   }),
   getters: {},
   actions: {
