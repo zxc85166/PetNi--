@@ -34,6 +34,7 @@ const signInWithGoogle = () => {
             store.PhotoURL = user.photoURL;
             store.setUserEmail(user.email);
             showModal.value = false;
+            getData();
         })
         .catch((error) => {
             // Handle Errors here.
