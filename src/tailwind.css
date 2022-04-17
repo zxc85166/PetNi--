@@ -3,10 +3,10 @@
 @tailwind utilities;
 @layer components {
   .btn-lg {
-    @apply mr-[10px] h-[90px] w-[90px] rounded-3xl bg-white  font-semibold drop-shadow-md hover:bg-PeNi_black  hover:text-white focus:outline-none  focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+    @apply mr-[10px] py-5 px-[23.5px] rounded-3xl bg-white  font-semibold drop-shadow-md hover:bg-PeNi_black  hover:text-white focus:outline-none  focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
   }
   .btn-sm {
-    @apply mr-[10px] h-[40px] w-[90px] rounded-[14px] bg-white  font-semibold drop-shadow-md hover:bg-PeNi_black  hover:text-white focus:outline-none  focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+    @apply mr-[10px] px-[31px] py-[9.5px] rounded-[14px] bg-white  font-semibold drop-shadow-md hover:bg-PeNi_black  hover:text-white focus:outline-none  focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
   }
   .routeIcon {
     @apply inline-flex h-12 items-center hover:text-PeNi_pink;
