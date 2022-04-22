@@ -306,16 +306,17 @@ const filterPage = ref(false);
         <p class="text-lg font-black">篩選</p>
         <div></div>
       </div>
-      <div class="lg:h-[402.48px] lg:w-[231.97px] rotate-[18deg] rounded-[32px] bg-white pt-11 drop-shadow-xl">
+      <div
+        class="h-96 w-64 lg:h-[402.48px] lg:w-[231.97px] rotate-[18deg] rounded-[32px] bg-white pt-11 drop-shadow-xl">
         <div
-          class="lg:absolute lg:h-[430.24px] lg:w-[253.74px] lg:-translate-y-12 lg:-translate-x-12 -rotate-6 rounded-[32px] bg-white drop-shadow-xl">
+          class="h-96 w-64 lg:absolute lg:h-[430.24px] lg:w-[253.74px] lg:-translate-y-12 lg:-translate-x-12 -rotate-6 rounded-[32px] bg-white drop-shadow-xl">
           <span class="absolute left-[20%] top-[43%] -rotate-12 text-center text-PeNi_pink">
             <p>很抱歉 !</p>
             <p>已沒有單身狗、單身貓了，</p>請嘗試修改篩選條件。
           </span>
           <TransitionGroup name="slide-fade" tag="div">
             <div v-for="(item, index) in el" :key="index"
-              class="absolute lg:h-[461.96px] lg:w-[287.84px] translate-y-1 -translate-x-3 -rotate-[15deg] rounded-[32px] border-[12px] border-white bg-bg"
+              class="absolute h-[410px] w-72 lg:h-[461.96px] lg:w-[287.84px] translate-y-1 -translate-x-3 -rotate-[15deg] rounded-[32px] border-[12px] border-white bg-bg"
               :class="love">
               <div>
                 <n-image class="rounded-[24px] w-full h-full object-center object-cover" :src="item.PicUrl"
