@@ -18,6 +18,7 @@ const router = useRouter()
 
 //使用者填入的新增資料
 const newPicUrl = ref(null);
+const newPicUrlID = ref(null);
 const newCatsOrDog = ref(null);
 const newGender = ref(null);
 const newAge = ref(null);
@@ -190,6 +191,7 @@ function clickColorBtn(e) {
 //輸入
 const publishBtn = () => {
     newPicUrl.value = store.NowPetPhoto;
+    newPicUrlID.value = store.NowPetPhotoID;
     if (!newCatsOrDog.value || !newGender.value || !newAge.value || !newColor.value || !newContact.value || !newCity.value || !newDistrict.value) {
         showWarning.value = true;
         return;
@@ -198,9 +200,13 @@ const publishBtn = () => {
     router.push("/adoption/list");
 }
 const createData = async () => {
+    if (newName.value = null) {
+        newName.value = "尚未取名";
+    }
     await addDoc(collection(db, store.UserEmail), {
         // Age: Number(newAge.value),
         PicUrl: newPicUrl.value,
+        PicUrlID: newPicUrlID.value,
         CatsOrDog: newCatsOrDog.value,
         Gender: newGender.value,
         Age: newAge.value,
@@ -212,6 +218,7 @@ const createData = async () => {
         Condtion: newCondition.value,
     });
     newPicUrl.value = null;
+    newPicUrlID.value = null;
     newCatsOrDog.value = null;
     newGender.value = null;
     newAge.value = null;

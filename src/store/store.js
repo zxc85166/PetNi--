@@ -12,6 +12,7 @@ export const useStore = defineStore({
     UserData: "",
     //傳參數-送養寵物照片
     NowPetPhoto: "",
+    NowPetPhotoID: "",
     //所有資料
     AllData: "",
     //當前資料

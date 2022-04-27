@@ -3,9 +3,9 @@ import { NIcon, NModal } from "naive-ui";
 import { useStore } from "@/store/store.js";
 import { useRouter } from 'vue-router'
 // 註冊 firebase
-import { app, storage, db } from "@/firebase.js";
+import { app, db } from "@/firebase.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { ref as fireRef, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { ref as fireRef, uploadBytes, listAll, getDownloadURL, deleteObject, getStorage } from "firebase/storage";
 import { ref, onMounted } from "vue";
 import { v4 } from "uuid";
 import {
@@ -20,6 +20,7 @@ const store = useStore();
 const showModal = ref(false);
 const router = useRouter()
 const auth = getAuth();
+const storage = getStorage();
 //google登入
 const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
@@ -80,9 +81,11 @@ function onFileChanged($event) {
     imageUpload.value = $event.target.files[0];
 }
 function uploadImage() {
-    if (imageUpload.value == null) return;
-
-    const imageRef = fireRef(storage, `images/${imageUpload.value.name + v4()}`);
+    if (imageUpload.value == null) {
+        alert("請選擇圖片");
+        return;
+    }
+    const imageRef = fireRef(storage, `${imageUpload.value.name + v4()}`);
     uploadBytes(imageRef, imageUpload.value)
         .then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
@@ -91,6 +94,7 @@ function uploadImage() {
                 //     url: url,
                 // });
                 store.NowPetPhoto = url;
+                store.NowPetPhotoID = snapshot.ref.fullPath;
             });
             router.push("/adoption/edit");
         })
@@ -106,9 +110,16 @@ function setNowData(item) {
     // store.$patch({ NowPetPhoto: url });
 }
 //刪除
-const deleteItem = async (id) => {
+const deleteItem = async (id, PicUrlID) => {
+    console.log(PicUrlID);
+    const desertRef = fireRef(storage, PicUrlID);
     const userDoc = doc(db, store.UserEmail, id);
-    await deleteDoc(userDoc);
+    await deleteDoc(userDoc); //刪除資料
+    await deleteObject(desertRef).then(() => {
+        // 圖片成功刪除
+    }).catch((error) => {
+        console.log(error);
+    });
     getData();
 };
 </script>
@@ -133,8 +144,8 @@ const deleteItem = async (id) => {
                 <div class="aspect-w-3 aspect-h-3">
                     <img :src="item.PicUrl" class="rounded-[28px] object-cover align-middle border-none p-4" />
                 </div>
-                <div @click.stop.prevent="deleteItem(item.id)" class="top-3 right-3 z-10 absolute">
-                    <n-icon size="56" class="hover:text-pink-300 cursor-pointer">
+                <div @click.stop.prevent="deleteItem(item.id, item.PicUrlID)" class="top-3 right-3 z-10 absolute">
+                    <n-icon size="40" class="hover:text-pink-300 cursor-pointer text-slate-600">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             aria-hidden="true" role="img" class="iconify iconify--ri" width="32" height="32"
                             preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
